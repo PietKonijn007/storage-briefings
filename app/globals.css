@@ -1,53 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
 /* ============================================================
-   Design tokens — Dark, editorial, top-consultancy
-   Palette: deep ink + bone + warm gold accent
+   Design tokens — Light editorial, modernist consultancy
+   Palette: warm off-white + ink + deep navy accent
    ============================================================ */
 
 @theme {
-  /* Brand — warm gold accent on near-black */
-  --color-brand-50:  #fef7e6;
-  --color-brand-100: #fceac0;
-  --color-brand-200: #f9d589;
-  --color-brand-300: #f3bd52;
-  --color-brand-400: #e5a82e;
-  --color-brand-500: #c98f1c;
-  --color-brand-600: #a47214;
-  --color-brand-700: #7f5810;
-  --color-brand-800: #5d3f0c;
-  --color-brand-900: #3a2807;
-  --color-brand-950: #1c1304;
+  /* Brand — deep navy */
+  --color-brand-50:  #eef3f9;
+  --color-brand-100: #d4e0ee;
+  --color-brand-200: #a8c1dd;
+  --color-brand-300: #6f95bf;
+  --color-brand-400: #3e6ea2;
+  --color-brand-500: #1e4d8c;
+  --color-brand-600: #14386b;
+  --color-brand-700: #0a2540;
+  --color-brand-800: #061a30;
+  --color-brand-900: #04111f;
+  --color-brand-950: #02090f;
 
-  /* Surfaces — deep ink scale */
-  --color-surface:        #0a0b0e;
-  --color-surface-1:      #0f1115;
-  --color-surface-2:      #14171c;
-  --color-surface-3:      #1b1f25;
-  --color-surface-elev:   #1d2128;
-  --color-surface-alt:    #1b1f25;
+  /* Surfaces — warm paper scale */
+  --color-surface:        #faf8f3;
+  --color-surface-1:      #ffffff;
+  --color-surface-2:      #f3f0e9;
+  --color-surface-3:      #ebe7dd;
+  --color-surface-elev:   #ffffff;
+  --color-surface-alt:    #f3f0e9;
 
   /* Lines + dividers */
-  --color-border:        rgba(255, 255, 255, 0.07);
-  --color-border-strong: rgba(255, 255, 255, 0.14);
+  --color-border:        rgba(20, 24, 31, 0.10);
+  --color-border-strong: rgba(20, 24, 31, 0.20);
 
-  /* Text — bone scale */
-  --color-text-primary:   #f3f0e8;
-  --color-text-secondary: #b8b4a9;
-  --color-text-muted:     #7e7a72;
-  --color-text-faint:     #4b4843;
+  /* Text — ink scale */
+  --color-text-primary:   #14181f;
+  --color-text-secondary: #4a5260;
+  --color-text-muted:     #767e8c;
+  --color-text-faint:     #aab1bc;
 
-  /* Signal accents (refined for dark) */
-  --color-signal-green: #5fb98a;
-  --color-signal-blue:  #7da7d9;
-  --color-signal-amber: #d9a25a;
-  --color-signal-red:   #d97362;
+  /* Signal accents */
+  --color-signal-green: #1f7a4f;
+  --color-signal-blue:  #1e4d8c;
+  --color-signal-amber: #b87900;
+  --color-signal-red:   #b03030;
 
   --font-serif: "Newsreader", "Iowan Old Style", "Georgia", serif;
   --font-sans:  "Inter", "Söhne", system-ui, sans-serif;
-  --font-mono:  "JetBrains Mono", "IBM Plex Mono", monospace;
+  --font-mono:  "IBM Plex Mono", "JetBrains Mono", monospace;
 }
 
 /* ============================================================
@@ -67,8 +67,8 @@ body {
 }
 
 ::selection {
-  background: var(--color-brand-400);
-  color: var(--color-surface);
+  background: var(--color-brand-700);
+  color: var(--color-surface-1);
 }
 
 a {
@@ -79,17 +79,17 @@ a {
 a.underline-on-hover:hover {
   text-decoration: underline;
   text-underline-offset: 4px;
-  text-decoration-color: var(--color-brand-400);
+  text-decoration-color: var(--color-brand-500);
 }
 
-/* Reading progress bar (dark) */
+/* Reading progress bar */
 .progress-bar {
   position: fixed;
   top: 0;
   left: 0;
   height: 2px;
   width: 0;
-  background: linear-gradient(90deg, var(--color-brand-300), var(--color-brand-500));
+  background: var(--color-brand-700);
   z-index: 100;
   transition: width 80ms linear;
 }
@@ -122,93 +122,97 @@ a.underline-on-hover:hover {
   font-family: var(--font-mono);
 }
 
-/* Hairline divider — high-end magazine look */
+/* Hairline divider */
 .hairline {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-border-strong), transparent);
+  background: var(--color-border);
 }
 
-/* Glass surface — for cards */
-.glass {
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0)) ,
-    var(--color-surface-1);
+.hairline-strong {
+  height: 1px;
+  background: var(--color-border-strong);
+}
+
+/* Flat surface — for cards (replaces .glass) */
+.surface {
+  background: var(--color-surface-1);
   border: 1px solid var(--color-border);
-  border-radius: 14px;
-  transition: transform 200ms ease, border-color 200ms ease, background 200ms ease;
+  border-radius: 4px;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
-.glass:hover {
+.surface:hover {
   border-color: var(--color-border-strong);
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0)) ,
-    var(--color-surface-2);
+  box-shadow: 0 1px 0 var(--color-border);
 }
 
-.glass-feature {
-  background:
-    radial-gradient(120% 80% at 0% 0%, rgba(229, 168, 46, 0.08), transparent 55%),
-    radial-gradient(120% 80% at 100% 100%, rgba(125, 167, 217, 0.05), transparent 55%),
-    var(--color-surface-1);
+.surface-feature {
+  background: var(--color-surface-1);
   border: 1px solid var(--color-border-strong);
-  border-radius: 18px;
+  border-radius: 4px;
 }
 
 /* Segmented control — track switcher */
 .segmented {
   display: inline-flex;
   align-items: center;
-  gap: 2px;
-  padding: 4px;
-  background: var(--color-surface-1);
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
+  gap: 0;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 2px;
+  overflow: hidden;
 }
 
 .segmented a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 16px;
-  border-radius: 999px;
-  font-size: 13px;
+  padding: 8px 18px;
+  font-size: 12px;
   font-weight: 500;
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--color-text-secondary);
-  transition: all 180ms ease;
+  border-right: 1px solid var(--color-border-strong);
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.segmented a:last-child {
+  border-right: 0;
 }
 
 .segmented a:hover {
   color: var(--color-text-primary);
+  background: var(--color-surface-2);
 }
 
 .segmented a.active {
-  background: var(--color-text-primary);
-  color: var(--color-surface);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.05) inset, 0 4px 16px -8px rgba(0,0,0,0.6);
+  background: var(--color-brand-700);
+  color: var(--color-surface-1);
 }
 
 .segmented a .count {
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 600;
-  padding: 2px 6px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.06);
   color: var(--color-text-muted);
 }
 
 .segmented a.active .count {
-  background: rgba(0,0,0,0.12);
-  color: var(--color-surface);
+  color: var(--color-brand-200);
 }
 
-/* Signal number — gold-bordered badge */
+/* Signal number — clean numbered marker */
 .signal-badge {
-  width: 22px;
+  min-width: 24px;
   height: 22px;
-  border-radius: 999px;
-  border: 1px solid var(--color-brand-400);
-  color: var(--color-brand-300);
+  padding: 0 4px;
+  border-radius: 2px;
+  color: var(--color-brand-700);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 600;
@@ -216,7 +220,6 @@ a.underline-on-hover:hover {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  background: rgba(229, 168, 46, 0.06);
 }
 
 /* Pills */
@@ -224,7 +227,7 @@ a.underline-on-hover:hover {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 10px;
+  padding: 3px 9px;
   border-radius: 999px;
   font-size: 11px;
   font-weight: 500;
@@ -241,18 +244,18 @@ a.underline-on-hover:hover {
   border-radius: 999px;
 }
 
-/* Category tag — used in detail-page breadcrumb */
+/* Category tag */
 .cat-tag {
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: 999px;
-  color: var(--color-brand-300);
-  background: rgba(229, 168, 46, 0.08);
-  border: 1px solid rgba(229, 168, 46, 0.25);
+  padding: 3px 9px;
+  border-radius: 2px;
+  color: var(--color-brand-700);
+  background: var(--color-brand-50);
+  border: 1px solid var(--color-brand-100);
 }
 
 /* ============================================================
@@ -262,7 +265,7 @@ a.underline-on-hover:hover {
 .briefing-content {
   font-family: var(--font-serif);
   font-size: 1.08rem;
-  line-height: 1.78;
+  line-height: 1.75;
   color: var(--color-text-primary);
 }
 
@@ -281,25 +284,27 @@ a.underline-on-hover:hover {
 
 .briefing-content h2 {
   font-family: var(--font-sans);
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 600;
   margin-top: 3.5rem;
   margin-bottom: 1rem;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--color-border);
-  color: var(--color-brand-300);
-  letter-spacing: 0.2em;
+  border-bottom: 1px solid var(--color-border-strong);
+  color: var(--color-brand-700);
+  letter-spacing: 0.22em;
   text-transform: uppercase;
+  scroll-margin-top: 90px;
 }
 
 .briefing-content h3 {
-  font-family: var(--font-sans);
-  font-size: 1.15rem;
-  font-weight: 600;
-  margin-top: 2.25rem;
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-top: 2.5rem;
   margin-bottom: 0.6rem;
   color: var(--color-text-primary);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
 }
 
 .briefing-content h4 {
@@ -308,7 +313,7 @@ a.underline-on-hover:hover {
   font-weight: 600;
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
   text-transform: none;
   letter-spacing: 0;
 }
@@ -331,33 +336,33 @@ a.underline-on-hover:hover {
 }
 
 .briefing-content a {
-  color: var(--color-brand-300);
+  color: var(--color-brand-700);
   text-decoration: underline;
-  text-decoration-color: rgba(229, 168, 46, 0.4);
+  text-decoration-color: var(--color-brand-200);
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
   transition: text-decoration-color 150ms ease, color 150ms ease;
 }
 
 .briefing-content a:hover {
-  color: var(--color-brand-200);
-  text-decoration-color: var(--color-brand-300);
+  color: var(--color-brand-500);
+  text-decoration-color: var(--color-brand-500);
 }
 
 .briefing-content blockquote {
-  border-left: 2px solid var(--color-brand-400);
-  background: var(--color-surface-1);
+  border-left: 2px solid var(--color-brand-700);
+  background: var(--color-surface-2);
   margin: 1.5rem 0;
   padding: 0.9rem 1.25rem;
   color: var(--color-text-secondary);
   font-style: italic;
-  border-radius: 0 8px 8px 0;
+  border-radius: 0 4px 4px 0;
 }
 
 .briefing-content hr {
   border: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-border-strong), transparent);
+  background: var(--color-border);
   margin: 3rem 0;
 }
 
@@ -371,7 +376,7 @@ a.underline-on-hover:hover {
 }
 
 .briefing-content ul li::marker {
-  color: var(--color-brand-400);
+  color: var(--color-brand-500);
 }
 
 .briefing-content code {
@@ -380,14 +385,14 @@ a.underline-on-hover:hover {
   padding: 1px 6px;
   background: var(--color-surface-2);
   border: 1px solid var(--color-border);
-  border-radius: 4px;
-  color: var(--color-brand-200);
+  border-radius: 3px;
+  color: var(--color-brand-700);
 }
 
 .briefing-content pre {
   background: var(--color-surface-2);
   border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 1rem 1.25rem;
   overflow-x: auto;
   font-family: var(--font-mono);
@@ -410,7 +415,7 @@ a.underline-on-hover:hover {
   font-family: var(--font-sans);
   font-size: 0.92rem;
   border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
 }
 
@@ -424,8 +429,8 @@ a.underline-on-hover:hover {
   padding: 0.75rem 1rem;
   color: var(--color-text-primary);
   border-bottom: 1px solid var(--color-border);
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -441,20 +446,62 @@ a.underline-on-hover:hover {
 }
 
 .briefing-content tbody tr:hover {
-  background: var(--color-surface-1);
+  background: var(--color-surface-2);
 }
 
 /* ============================================================
-   Subtle background grain — gives the deep ink a tactile feel
+   TOC rail — sticky on desktop
    ============================================================ */
 
-.grain {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.025;
-  z-index: 0;
-  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+.toc-rail {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.toc-rail .toc-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.toc-rail ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: toc;
+}
+
+.toc-rail ol li {
+  counter-increment: toc;
+  margin-bottom: 0.5rem;
+}
+
+.toc-rail ol li a {
+  display: flex;
+  gap: 10px;
+  padding: 4px 0;
+  color: var(--color-text-secondary);
+  transition: color 150ms ease;
+}
+
+.toc-rail ol li a::before {
+  content: counter(toc, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--color-text-faint);
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+
+.toc-rail ol li a:hover {
+  color: var(--color-brand-700);
 }
 
 /* ============================================================

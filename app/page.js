@@ -12,7 +12,6 @@ function formatDateShort(dateStr) {
 }
 
 function issueNumber(dateStr, allDates) {
-  // Issue number = position within the same track, oldest = 1
   const sorted = [...allDates].sort();
   const idx = sorted.indexOf(dateStr);
   return idx >= 0 ? String(idx + 1).padStart(2, '0') : '—';
@@ -70,19 +69,17 @@ export default async function HomePage({ searchParams }) {
   return (
     <div className="max-w-6xl mx-auto px-6 lg:px-8 pt-12 pb-20">
       {/* ============== HERO ============== */}
-      <section className="grid grid-cols-12 gap-8 mb-16 items-end">
+      <section className="grid grid-cols-12 gap-8 mb-12 items-end">
         <div className="col-span-12 md:col-span-8">
           <div className="eyebrow mb-5">
             Vol. MMXXVI · {meta.label} Track
           </div>
-          <h1 className="editorial-display text-[clamp(2.5rem,7vw,5.5rem)] text-balance text-[var(--color-text-primary)] mb-6">
-            {category === 'storage' ? (
-              <>The week, in <span className="text-[var(--color-brand-300)] italic">storage</span> &amp; AI infrastructure.</>
-            ) : (
-              <>The week, in <span className="text-[var(--color-brand-300)] italic">AI</span> &amp; compute.</>
-            )}
+          <h1 className="editorial-display text-[clamp(2.5rem,6.5vw,4.75rem)] text-balance text-[var(--color-text-primary)] mb-6">
+            {category === 'storage'
+              ? 'The week, in storage & AI infrastructure.'
+              : 'The week, in AI & compute.'}
           </h1>
-          <p className="text-lg md:text-xl text-[var(--color-text-secondary)] max-w-2xl leading-relaxed serif">
+          <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl leading-relaxed serif">
             {meta.description}
           </p>
         </div>
@@ -91,7 +88,7 @@ export default async function HomePage({ searchParams }) {
         </div>
       </section>
 
-      <div className="hairline mb-14" />
+      <div className="hairline-strong mb-12" />
 
       {/* ============== FEATURE / LATEST ============== */}
       {latest && (
@@ -102,12 +99,12 @@ export default async function HomePage({ searchParams }) {
           </div>
 
           <Link href={`/briefings/${latest.slug}`} className="block group">
-            <article className="glass-feature p-8 md:p-12 grid grid-cols-12 gap-8">
+            <article className="surface-feature p-8 md:p-12 grid grid-cols-12 gap-8">
               {/* Left: issue marker + meta */}
-              <div className="col-span-12 md:col-span-3 flex md:flex-col justify-between md:justify-start gap-6">
+              <div className="col-span-12 md:col-span-3 flex md:flex-col justify-between md:justify-start gap-6 md:border-r md:border-[var(--color-border)] md:pr-8">
                 <div>
                   <div className="eyebrow mb-2">Issue №</div>
-                  <div className="editorial-display text-[64px] md:text-[88px] leading-none text-[var(--color-brand-300)]">
+                  <div className="editorial-display text-[64px] md:text-[88px] leading-none text-[var(--color-brand-700)]">
                     {issueNumber(latest.date, allDates)}
                   </div>
                 </div>
@@ -133,7 +130,7 @@ export default async function HomePage({ searchParams }) {
 
               {/* Right: signals + cover headline */}
               <div className="col-span-12 md:col-span-9">
-                <h2 className="editorial-display text-[clamp(1.75rem,3.8vw,2.75rem)] text-balance text-[var(--color-text-primary)] mb-7 leading-[1.08] group-hover:text-[var(--color-brand-200)] transition-colors">
+                <h2 className="editorial-display text-[clamp(1.75rem,3.5vw,2.5rem)] text-balance text-[var(--color-text-primary)] mb-7 leading-[1.1] group-hover:text-[var(--color-brand-700)] transition-colors">
                   {meta.longTitle} — week of {formatDateShort(latest.date)}.
                 </h2>
 
@@ -152,8 +149,8 @@ export default async function HomePage({ searchParams }) {
 
                 <div className="flex items-center justify-between flex-wrap gap-4 pt-5 border-t border-[var(--color-border)]">
                   <ConfidencePills confidence={latest.confidence} />
-                  <span className="text-sm font-medium text-[var(--color-brand-300)] group-hover:text-[var(--color-brand-200)] transition-colors">
-                    Read the full briefing &rarr;
+                  <span className="text-sm font-medium text-[var(--color-brand-700)] group-hover:text-[var(--color-brand-500)] transition-colors mono uppercase tracking-widest text-xs">
+                    Read briefing &rarr;
                   </span>
                 </div>
               </div>
@@ -173,7 +170,7 @@ export default async function HomePage({ searchParams }) {
           <div className="grid gap-4 md:grid-cols-2">
             {archive.map((b) => (
               <Link key={b.slug} href={`/briefings/${b.slug}`} className="block group">
-                <article className="glass p-6 h-full flex flex-col">
+                <article className="surface p-6 h-full flex flex-col">
                   <div className="flex items-start justify-between gap-4 mb-5">
                     <div>
                       <div className="eyebrow mb-1">№ {issueNumber(b.date, allDates)} · {meta.label}</div>
@@ -199,7 +196,7 @@ export default async function HomePage({ searchParams }) {
 
                   <div className="pt-4 mt-auto border-t border-[var(--color-border)] flex items-center justify-between gap-3">
                     <ConfidencePills confidence={b.confidence} />
-                    <span className="text-xs font-medium text-[var(--color-brand-300)] group-hover:text-[var(--color-brand-200)] transition-colors flex-shrink-0">
+                    <span className="text-[10px] font-medium text-[var(--color-brand-700)] group-hover:text-[var(--color-brand-500)] transition-colors flex-shrink-0 mono uppercase tracking-widest">
                       Read &rarr;
                     </span>
                   </div>
@@ -212,14 +209,14 @@ export default async function HomePage({ searchParams }) {
 
       {/* ============== EMPTY STATE ============== */}
       {briefings.length === 0 && (
-        <div className="glass p-16 text-center">
+        <div className="surface p-16 text-center">
           <div className="eyebrow mb-4">No issues yet</div>
           <p className="editorial-display text-3xl mb-3 text-[var(--color-text-primary)]">
             The {meta.label.toLowerCase()} track is empty.
           </p>
           <p className="text-sm text-[var(--color-text-muted)] max-w-md mx-auto">
             Drop a markdown file named{' '}
-            <code className="mono px-2 py-0.5 rounded bg-[var(--color-surface-2)] text-[var(--color-brand-200)] border border-[var(--color-border)]">
+            <code className="mono px-2 py-0.5 rounded bg-[var(--color-surface-2)] text-[var(--color-brand-700)] border border-[var(--color-border)]">
               {meta.prefix}YYYY-MM-DD.md
             </code>{' '}
             into the <code className="mono">content/</code> directory.

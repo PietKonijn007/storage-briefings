@@ -69,6 +69,24 @@ function ConfidencePills({ confidence }) {
   );
 }
 
+function TocRail({ toc }) {
+  if (!toc || toc.length === 0) return null;
+  return (
+    <nav className="toc-rail">
+      <div className="toc-label">Contents</div>
+      <ol>
+        {toc.map((item) => (
+          <li key={item.id}>
+            <a href={`#${item.id}`}>
+              <span>{item.text.replace(/^\d+\.\s*/, '')}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
+}
+
 export default async function BriefingPage({ params }) {
   const { slug } = await params;
   const briefing = getBriefingBySlug(slug);
@@ -84,20 +102,20 @@ export default async function BriefingPage({ params }) {
     <>
       <ReadingProgressBar />
 
-      <article className="max-w-3xl mx-auto px-6 lg:px-8 pt-10 pb-24">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-10 pb-24">
         {/* Breadcrumb */}
         <nav className="mb-12 flex items-center gap-4">
           <Link
             href={backHref}
-            className="text-xs font-medium text-[var(--color-text-muted)] hover:text-[var(--color-brand-300)] transition-colors mono uppercase tracking-widest"
+            className="text-xs font-medium text-[var(--color-text-muted)] hover:text-[var(--color-brand-700)] transition-colors mono uppercase tracking-widest"
           >
             ← All {cat.label} briefings
           </Link>
           <span className="cat-tag">{cat.label} · № {issue}</span>
         </nav>
 
-        {/* Article header — editorial cover */}
-        <header className="mb-12">
+        {/* Article header — editorial cover (full width) */}
+        <header className="mb-14 max-w-4xl">
           <div className="eyebrow mb-5">
             {formatDateLong(briefing.date)}
             {briefing.period ? <> · {briefing.period}</> : null}
@@ -115,7 +133,7 @@ export default async function BriefingPage({ params }) {
 
           {/* Signal block */}
           {briefing.signals.length > 0 && (
-            <div className="mt-10 glass p-7">
+            <div className="mt-10 surface-feature p-7">
               <div className="flex items-center justify-between mb-5">
                 <span className="eyebrow">— Key signals this week</span>
                 <span className="eyebrow mono">{String(briefing.signals.length).padStart(2, '0')} total</span>
@@ -137,22 +155,32 @@ export default async function BriefingPage({ params }) {
           )}
         </header>
 
-        <div className="hairline mb-12" />
+        <div className="hairline-strong mb-12" />
 
-        {/* Article body */}
-        <div className="briefing-content" dangerouslySetInnerHTML={{ __html: briefing.content }} />
+        {/* Two-column body — sticky TOC rail + article */}
+        <div className="grid grid-cols-12 gap-10 lg:gap-14">
+          <aside className="hidden lg:block lg:col-span-3">
+            <div className="sticky top-24">
+              <TocRail toc={briefing.toc} />
+            </div>
+          </aside>
 
-        {/* Bottom nav */}
-        <div className="mt-20 pt-8 border-t border-[var(--color-border)] flex items-center justify-between">
-          <Link
-            href={backHref}
-            className="text-xs font-medium text-[var(--color-text-muted)] hover:text-[var(--color-brand-300)] transition-colors mono uppercase tracking-widest"
-          >
-            ← Back to {cat.label.toLowerCase()} briefings
-          </Link>
-          <span className="cat-tag">{cat.label} · № {issue}</span>
+          <article className="col-span-12 lg:col-span-9 max-w-3xl">
+            <div className="briefing-content" dangerouslySetInnerHTML={{ __html: briefing.content }} />
+
+            {/* Bottom nav */}
+            <div className="mt-20 pt-8 border-t border-[var(--color-border)] flex items-center justify-between">
+              <Link
+                href={backHref}
+                className="text-xs font-medium text-[var(--color-text-muted)] hover:text-[var(--color-brand-700)] transition-colors mono uppercase tracking-widest"
+              >
+                ← Back to {cat.label.toLowerCase()} briefings
+              </Link>
+              <span className="cat-tag">{cat.label} · № {issue}</span>
+            </div>
+          </article>
         </div>
-      </article>
+      </div>
     </>
   );
 }
