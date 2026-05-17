@@ -107,9 +107,11 @@ export default async function BriefingPage({ params }) {
             {cat.longTitle}
           </h1>
 
-          <p className="text-lg text-[var(--color-text-secondary)] serif leading-relaxed max-w-2xl">
-            {cat.subtitle}
-          </p>
+          {cat.subtitle && (
+            <p className="text-lg text-[var(--color-text-secondary)] serif leading-relaxed max-w-2xl">
+              {cat.subtitle}
+            </p>
+          )}
 
           {/* Signal block */}
           {briefing.signals.length > 0 && (

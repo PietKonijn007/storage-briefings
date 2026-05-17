@@ -60,7 +60,6 @@ export default function RootLayout({ children }) {
                 </div>
                 <p className="text-xs text-[var(--color-text-muted)] mt-2 max-w-md leading-relaxed">
                   Strategic intelligence on storage, AI infrastructure, and the broader compute frontier.
-                  Prepared for the CTO and VP Sales Engineering, NetApp EMEA, LATAM &amp; Middle East.
                 </p>
               </div>
               <div className="flex items-center gap-6 eyebrow">
