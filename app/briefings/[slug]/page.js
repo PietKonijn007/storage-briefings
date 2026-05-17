@@ -158,14 +158,14 @@ export default async function BriefingPage({ params }) {
         <div className="hairline-strong mb-12" />
 
         {/* Two-column body — sticky TOC rail + article */}
-        <div className="grid grid-cols-12 gap-10 lg:gap-14">
+        <div className="lg:grid lg:grid-cols-12 lg:gap-10 xl:gap-14">
           <aside className="hidden lg:block lg:col-span-3">
             <div className="sticky top-24">
               <TocRail toc={briefing.toc} />
             </div>
           </aside>
 
-          <article className="col-span-12 lg:col-span-9 max-w-3xl min-w-0">
+          <article className="lg:col-span-9 max-w-3xl min-w-0">
             <div className="briefing-content" dangerouslySetInnerHTML={{ __html: briefing.content }} />
 
             {/* Bottom nav */}

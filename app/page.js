@@ -69,8 +69,8 @@ export default async function HomePage({ searchParams }) {
   return (
     <div className="max-w-6xl mx-auto px-6 lg:px-8 pt-12 pb-20">
       {/* ============== HERO ============== */}
-      <section className="grid grid-cols-12 gap-8 mb-12 items-end">
-        <div className="col-span-12 md:col-span-8">
+      <section className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 mb-12 items-end">
+        <div className="md:col-span-8">
           <div className="eyebrow mb-5">
             Vol. MMXXVI · {meta.label} Track
           </div>
@@ -83,7 +83,7 @@ export default async function HomePage({ searchParams }) {
             {meta.description}
           </p>
         </div>
-        <div className="col-span-12 md:col-span-4 md:text-right">
+        <div className="md:col-span-4 md:text-right">
           <Segmented active={category} counts={counts} />
         </div>
       </section>
@@ -99,9 +99,9 @@ export default async function HomePage({ searchParams }) {
           </div>
 
           <Link href={`/briefings/${latest.slug}`} className="block group">
-            <article className="surface-feature p-6 sm:p-8 md:p-12 grid grid-cols-12 gap-6 md:gap-8">
+            <article className="surface-feature p-6 sm:p-8 md:p-12 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
               {/* Left: issue marker + meta */}
-              <div className="col-span-12 md:col-span-3 min-w-0 md:border-r md:border-[var(--color-border)] md:pr-8">
+              <div className="md:col-span-3 min-w-0 md:border-r md:border-[var(--color-border)] md:pr-8">
                 <div className="flex items-start gap-6 md:block">
                   <div>
                     <div className="eyebrow mb-2">Issue №</div>
@@ -131,7 +131,7 @@ export default async function HomePage({ searchParams }) {
               </div>
 
               {/* Right: signals + cover headline */}
-              <div className="col-span-12 md:col-span-9 min-w-0">
+              <div className="md:col-span-9 min-w-0">
                 <h2 className="editorial-display text-[clamp(1.5rem,3.5vw,2.5rem)] text-balance text-[var(--color-text-primary)] mb-7 leading-[1.15] group-hover:text-[var(--color-brand-700)] transition-colors">
                   {meta.longTitle} — week of {formatDateShort(latest.date)}.
                 </h2>
