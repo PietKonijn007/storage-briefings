@@ -2,9 +2,6 @@
 
 **Week of May 10, 2026 — Period Covered: May 4–10, 2026**
 
-*Prepared for the CTO and VP Sales Engineering, NetApp EMEA, LATAM & Middle East*
-*4-Pass Multi-Source Research Methodology — 38+ queries across WebSearch + Perplexity*
-
 ---
 
 ## Table of Contents
