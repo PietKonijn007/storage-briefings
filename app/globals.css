@@ -57,6 +57,7 @@
 html, body {
   background: var(--color-surface);
   color: var(--color-text-primary);
+  overflow-x: clip;
 }
 
 body {
@@ -64,6 +65,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: "ss01", "cv11";
+  max-width: 100vw;
 }
 
 ::selection {
@@ -408,15 +410,20 @@ a.underline-on-hover:hover {
   color: var(--color-text-primary);
 }
 
-.briefing-content table {
-  width: 100%;
-  border-collapse: collapse;
+.briefing-content .table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   margin: 1.5rem 0;
-  font-family: var(--font-sans);
-  font-size: 0.92rem;
   border: 1px solid var(--color-border);
   border-radius: 4px;
-  overflow: hidden;
+}
+
+.briefing-content .table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
 }
 
 .briefing-content thead {

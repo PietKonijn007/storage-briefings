@@ -99,38 +99,40 @@ export default async function HomePage({ searchParams }) {
           </div>
 
           <Link href={`/briefings/${latest.slug}`} className="block group">
-            <article className="surface-feature p-8 md:p-12 grid grid-cols-12 gap-8">
+            <article className="surface-feature p-6 sm:p-8 md:p-12 grid grid-cols-12 gap-6 md:gap-8">
               {/* Left: issue marker + meta */}
-              <div className="col-span-12 md:col-span-3 flex md:flex-col justify-between md:justify-start gap-6 md:border-r md:border-[var(--color-border)] md:pr-8">
-                <div>
-                  <div className="eyebrow mb-2">Issue №</div>
-                  <div className="editorial-display text-[64px] md:text-[88px] leading-none text-[var(--color-brand-700)]">
-                    {issueNumber(latest.date, allDates)}
-                  </div>
-                </div>
-                <div className="md:mt-10 space-y-3">
+              <div className="col-span-12 md:col-span-3 min-w-0 md:border-r md:border-[var(--color-border)] md:pr-8">
+                <div className="flex items-start gap-6 md:block">
                   <div>
-                    <div className="eyebrow mb-1">Track</div>
-                    <div className="text-sm font-medium text-[var(--color-text-primary)]">{meta.label}</div>
+                    <div className="eyebrow mb-2">Issue №</div>
+                    <div className="editorial-display text-[56px] sm:text-[64px] md:text-[88px] leading-none text-[var(--color-brand-700)]">
+                      {issueNumber(latest.date, allDates)}
+                    </div>
                   </div>
-                  {latest.period && (
+                  <div className="space-y-3 md:mt-10 flex-1 min-w-0">
                     <div>
-                      <div className="eyebrow mb-1">Period</div>
-                      <div className="text-sm text-[var(--color-text-secondary)] leading-snug">{latest.period}</div>
+                      <div className="eyebrow mb-1">Track</div>
+                      <div className="text-sm font-medium text-[var(--color-text-primary)]">{meta.label}</div>
                     </div>
-                  )}
-                  {latest.sectionCount > 0 && (
-                    <div>
-                      <div className="eyebrow mb-1">Sections</div>
-                      <div className="text-sm text-[var(--color-text-secondary)] mono">{latest.sectionCount}</div>
-                    </div>
-                  )}
+                    {latest.period && (
+                      <div>
+                        <div className="eyebrow mb-1">Period</div>
+                        <div className="text-sm text-[var(--color-text-secondary)] leading-snug">{latest.period}</div>
+                      </div>
+                    )}
+                    {latest.sectionCount > 0 && (
+                      <div>
+                        <div className="eyebrow mb-1">Sections</div>
+                        <div className="text-sm text-[var(--color-text-secondary)] mono">{latest.sectionCount}</div>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
 
               {/* Right: signals + cover headline */}
-              <div className="col-span-12 md:col-span-9">
-                <h2 className="editorial-display text-[clamp(1.75rem,3.5vw,2.5rem)] text-balance text-[var(--color-text-primary)] mb-7 leading-[1.1] group-hover:text-[var(--color-brand-700)] transition-colors">
+              <div className="col-span-12 md:col-span-9 min-w-0">
+                <h2 className="editorial-display text-[clamp(1.5rem,3.5vw,2.5rem)] text-balance text-[var(--color-text-primary)] mb-7 leading-[1.15] group-hover:text-[var(--color-brand-700)] transition-colors">
                   {meta.longTitle} — week of {formatDateShort(latest.date)}.
                 </h2>
 

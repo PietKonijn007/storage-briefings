@@ -133,10 +133,10 @@ export default async function BriefingPage({ params }) {
 
           {/* Signal block */}
           {briefing.signals.length > 0 && (
-            <div className="mt-10 surface-feature p-7">
-              <div className="flex items-center justify-between mb-5">
+            <div className="mt-10 surface-feature p-5 sm:p-7">
+              <div className="flex items-center justify-between gap-4 mb-5">
                 <span className="eyebrow">— Key signals this week</span>
-                <span className="eyebrow mono">{String(briefing.signals.length).padStart(2, '0')} total</span>
+                <span className="eyebrow mono whitespace-nowrap">{String(briefing.signals.length).padStart(2, '0')} total</span>
               </div>
               <ol className="space-y-4">
                 {briefing.signals.map((s, i) => (
@@ -165,7 +165,7 @@ export default async function BriefingPage({ params }) {
             </div>
           </aside>
 
-          <article className="col-span-12 lg:col-span-9 max-w-3xl">
+          <article className="col-span-12 lg:col-span-9 max-w-3xl min-w-0">
             <div className="briefing-content" dangerouslySetInnerHTML={{ __html: briefing.content }} />
 
             {/* Bottom nav */}
