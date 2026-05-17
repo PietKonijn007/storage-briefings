@@ -1,4 +1,4 @@
-import { getBriefingBySlug, getAllSlugs } from '../../../lib/briefings';
+import { getBriefingBySlug, getAllSlugs, getAllBriefings, CATEGORIES } from '../../../lib/briefings';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -11,21 +11,22 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const briefing = getBriefingBySlug(slug);
   if (!briefing) return { title: 'Not Found' };
-
+  const cat = CATEGORIES[briefing.category];
   return {
-    title: `Week of ${briefing.date} — Storage & AI Briefing`,
-    description: `Weekly Storage & AI Data Platform Briefing covering ${briefing.period || briefing.date}`,
+    title: `Week of ${briefing.date} — ${cat.shortTitle}`,
+    description: `${cat.longTitle} covering ${briefing.period || briefing.date}`,
   };
 }
 
-function formatDate(dateStr) {
-  const date = new Date(dateStr + 'T00:00:00');
-  return date.toLocaleDateString('en-US', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+function formatDateLong(dateStr) {
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+function issueNumber(dateStr, allDates) {
+  const sorted = [...allDates].sort();
+  const idx = sorted.indexOf(dateStr);
+  return idx >= 0 ? String(idx + 1).padStart(2, '0') : '—';
 }
 
 function ReadingProgressBar() {
@@ -49,110 +50,105 @@ function ReadingProgressBar() {
   );
 }
 
+function ConfidencePills({ confidence }) {
+  const items = [];
+  if (confidence.crossValidated > 0) items.push({ label: 'cross-validated', count: confidence.crossValidated, dot: 'var(--color-signal-green)' });
+  if (confidence.multiPass > 0) items.push({ label: 'multi-pass', count: confidence.multiPass, dot: 'var(--color-signal-blue)' });
+  if (confidence.singleSource > 0) items.push({ label: 'single source', count: confidence.singleSource, dot: 'var(--color-signal-amber)' });
+  if (items.length === 0) return null;
+  return (
+    <div className="flex flex-wrap gap-2">
+      {items.map((p) => (
+        <span key={p.label} className="pill">
+          <span className="pill-dot" style={{ background: p.dot }} />
+          <span className="font-semibold text-[var(--color-text-primary)]">{p.count}</span>
+          <span>{p.label}</span>
+        </span>
+      ))}
+    </div>
+  );
+}
+
 export default async function BriefingPage({ params }) {
   const { slug } = await params;
   const briefing = getBriefingBySlug(slug);
+  if (!briefing) notFound();
 
-  if (!briefing) {
-    notFound();
-  }
+  const cat = CATEGORIES[briefing.category];
+  const backHref = briefing.category === 'storage' ? '/' : `/?category=${briefing.category}`;
+  const trackBriefings = getAllBriefings(briefing.category);
+  const allDates = trackBriefings.map((b) => b.date);
+  const issue = issueNumber(briefing.date, allDates);
 
   return (
     <>
       <ReadingProgressBar />
 
-      <article className="max-w-3xl mx-auto px-6 py-12">
+      <article className="max-w-3xl mx-auto px-6 lg:px-8 pt-10 pb-24">
         {/* Breadcrumb */}
-        <nav className="mb-8">
+        <nav className="mb-12 flex items-center gap-4">
           <Link
-            href="/"
-            className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-brand-600)] transition-colors no-underline"
+            href={backHref}
+            className="text-xs font-medium text-[var(--color-text-muted)] hover:text-[var(--color-brand-300)] transition-colors mono uppercase tracking-widest"
           >
-            &larr; All Briefings
+            ← All {cat.label} briefings
           </Link>
+          <span className="cat-tag">{cat.label} · № {issue}</span>
         </nav>
 
-        {/* Article header */}
-        <header className="mb-10">
-          <div className="flex items-center gap-3 mb-4">
-            <time className="text-sm font-medium text-[var(--color-brand-600)]">
-              {formatDate(briefing.date)}
-            </time>
-            {briefing.period && (
-              <>
-                <span className="text-[var(--color-border)]">|</span>
-                <span className="text-sm text-[var(--color-text-muted)]">{briefing.period}</span>
-              </>
-            )}
+        {/* Article header — editorial cover */}
+        <header className="mb-12">
+          <div className="eyebrow mb-5">
+            {formatDateLong(briefing.date)}
+            {briefing.period ? <> · {briefing.period}</> : null}
           </div>
 
-          <h1 className="text-3xl sm:text-4xl font-bold text-[var(--color-text-primary)] tracking-tight leading-tight mb-4">
-            Weekly Storage & AI Briefing
+          <h1 className="editorial-display text-[clamp(2.25rem,5vw,3.75rem)] text-balance text-[var(--color-text-primary)] leading-[1.08] mb-6">
+            {cat.longTitle}
           </h1>
 
-          <p className="text-base text-[var(--color-text-secondary)]" style={{ fontFamily: 'var(--font-serif)' }}>
-            Prepared for the CTO and VP Sales Engineering, NetApp EMEA, LATAM & Middle East
+          <p className="text-lg text-[var(--color-text-secondary)] serif leading-relaxed max-w-2xl">
+            {cat.subtitle}
           </p>
 
-          {/* Signal chips */}
+          {/* Signal block */}
           {briefing.signals.length > 0 && (
-            <div className="mt-6 p-5 bg-white rounded-xl border border-[var(--color-border)]">
-              <div className="text-xs font-semibold text-[var(--color-text-muted)] uppercase tracking-wider mb-3">
-                Key Signals This Week
+            <div className="mt-10 glass p-7">
+              <div className="flex items-center justify-between mb-5">
+                <span className="eyebrow">— Key signals this week</span>
+                <span className="eyebrow mono">{String(briefing.signals.length).padStart(2, '0')} total</span>
               </div>
-              <div className="space-y-2">
-                {briefing.signals.map((signal, i) => (
-                  <div key={i} className="flex items-start gap-2.5">
-                    <span className="signal-badge flex-shrink-0 mt-0.5">{i + 1}</span>
-                    <span className="text-sm text-[var(--color-text-primary)] leading-snug font-medium">
-                      {signal}
+              <ol className="space-y-4">
+                {briefing.signals.map((s, i) => (
+                  <li key={i} className="flex gap-4 items-start">
+                    <span className="signal-badge mt-1">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="text-[15px] leading-relaxed text-[var(--color-text-primary)] serif">
+                      {s}
                     </span>
-                  </div>
+                  </li>
                 ))}
+              </ol>
+              <div className="mt-6 pt-5 border-t border-[var(--color-border)]">
+                <ConfidencePills confidence={briefing.confidence} />
               </div>
             </div>
           )}
-
-          {/* Confidence summary */}
-          <div className="flex flex-wrap gap-2 mt-4">
-            {briefing.confidence.crossValidated > 0 && (
-              <span className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full bg-green-50 text-green-700">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                {briefing.confidence.crossValidated} cross-validated
-              </span>
-            )}
-            {briefing.confidence.multiPass > 0 && (
-              <span className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full bg-blue-50 text-blue-700">
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                {briefing.confidence.multiPass} multi-pass
-              </span>
-            )}
-            {briefing.confidence.singleSource > 0 && (
-              <span className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full bg-amber-50 text-amber-700">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                {briefing.confidence.singleSource} single source
-              </span>
-            )}
-          </div>
         </header>
 
-        {/* Divider */}
-        <hr className="border-[var(--color-border)] mb-10" />
+        <div className="hairline mb-12" />
 
         {/* Article body */}
-        <div
-          className="briefing-content"
-          dangerouslySetInnerHTML={{ __html: briefing.content }}
-        />
+        <div className="briefing-content" dangerouslySetInnerHTML={{ __html: briefing.content }} />
 
         {/* Bottom nav */}
-        <div className="mt-16 pt-8 border-t border-[var(--color-border)]">
+        <div className="mt-20 pt-8 border-t border-[var(--color-border)] flex items-center justify-between">
           <Link
-            href="/"
-            className="text-sm font-medium text-[var(--color-brand-600)] hover:text-[var(--color-brand-700)] no-underline"
+            href={backHref}
+            className="text-xs font-medium text-[var(--color-text-muted)] hover:text-[var(--color-brand-300)] transition-colors mono uppercase tracking-widest"
           >
-            &larr; Back to all briefings
+            ← Back to {cat.label.toLowerCase()} briefings
           </Link>
+          <span className="cat-tag">{cat.label} · № {issue}</span>
         </div>
       </article>
     </>

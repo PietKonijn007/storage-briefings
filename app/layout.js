@@ -1,59 +1,81 @@
 import './globals.css';
+import Link from 'next/link';
 
 export const metadata = {
-  title: 'Storage & AI Briefing',
-  description: 'Weekly Storage & AI Data Platform Briefing for NetApp EMEA, LATAM & Middle East',
+  title: 'Briefings — Storage · AI · Compute',
+  description:
+    'Weekly Storage & AI Data Platform Briefings and Weekly AI & Compute Innovation Briefings.',
 };
+
+function Wordmark() {
+  return (
+    <Link href="/" className="flex items-baseline gap-3">
+      <span className="editorial-display text-[22px] tracking-tight text-[var(--color-text-primary)]">
+        Briefings<span className="text-[var(--color-brand-400)]">.</span>
+      </span>
+      <span className="hidden md:inline eyebrow">
+        Storage · AI · Compute
+      </span>
+    </Link>
+  );
+}
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-[var(--color-surface)] min-h-screen">
-        {/* Top accent bar */}
-        <div className="h-1 bg-gradient-to-r from-[var(--color-brand-600)] via-[var(--color-brand-400)] to-[var(--color-brand-600)]" />
+      <body className="min-h-screen relative">
+        <div className="grain" aria-hidden="true" />
 
-        {/* Header */}
-        <header className="border-b border-[var(--color-border)] bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-          <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="/" className="flex items-center gap-3 no-underline">
-              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[var(--color-brand-600)] to-[var(--color-brand-800)] flex items-center justify-center">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                  <path d="M2 17l10 5 10-5" />
-                  <path d="M2 12l10 5 10-5" />
-                </svg>
-              </div>
+        <div className="relative z-10">
+          {/* Header */}
+          <header className="border-b border-[var(--color-border)] bg-[var(--color-surface)]/85 backdrop-blur-md sticky top-0 z-40">
+            <div className="max-w-6xl mx-auto px-6 lg:px-8 py-5 flex items-center justify-between">
+              <Wordmark />
+              <nav className="flex items-center gap-1 text-sm">
+                <Link
+                  href="/"
+                  className="px-3 py-1.5 rounded-md text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors font-medium"
+                >
+                  Storage
+                </Link>
+                <Link
+                  href="/?category=ai"
+                  className="px-3 py-1.5 rounded-md text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors font-medium"
+                >
+                  AI &amp; Compute
+                </Link>
+              </nav>
+            </div>
+          </header>
+
+          {/* Main content */}
+          <main>{children}</main>
+
+          {/* Footer */}
+          <footer className="mt-32 border-t border-[var(--color-border)]">
+            <div className="max-w-6xl mx-auto px-6 lg:px-8 py-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
               <div>
-                <h1 className="text-lg font-bold text-[var(--color-text-primary)] leading-tight tracking-tight">
-                  Storage & AI Briefing
-                </h1>
-                <p className="text-xs text-[var(--color-text-muted)] font-medium">
-                  NetApp EMEA, LATAM & Middle East
+                <div className="editorial-display text-[20px] text-[var(--color-text-primary)]">
+                  Briefings<span className="text-[var(--color-brand-400)]">.</span>
+                </div>
+                <p className="text-xs text-[var(--color-text-muted)] mt-2 max-w-md leading-relaxed">
+                  Strategic intelligence on storage, AI infrastructure, and the broader compute frontier.
+                  Prepared for the CTO and VP Sales Engineering, NetApp EMEA, LATAM &amp; Middle East.
                 </p>
               </div>
-            </a>
-            <nav className="hidden sm:flex items-center gap-4 text-sm text-[var(--color-text-secondary)]">
-              <a href="/" className="hover:text-[var(--color-brand-600)] transition-colors font-medium">
-                Archive
-              </a>
-            </nav>
-          </div>
-        </header>
-
-        {/* Main content */}
-        <main>{children}</main>
-
-        {/* Footer */}
-        <footer className="border-t border-[var(--color-border)] mt-20">
-          <div className="max-w-5xl mx-auto px-6 py-8 text-center">
-            <p className="text-sm text-[var(--color-text-muted)]">
-              Weekly Storage & AI Data Platform Briefing
-            </p>
-            <p className="text-xs text-[var(--color-text-muted)] mt-1">
-              Prepared for the CTO and VP Sales Engineering, NetApp EMEA, LATAM & Middle East
-            </p>
-          </div>
-        </footer>
+              <div className="flex items-center gap-6 eyebrow">
+                <Link href="/" className="hover:text-[var(--color-text-primary)] transition-colors">Storage</Link>
+                <Link href="/?category=ai" className="hover:text-[var(--color-text-primary)] transition-colors">AI &amp; Compute</Link>
+              </div>
+            </div>
+            <div className="border-t border-[var(--color-border)]">
+              <div className="max-w-6xl mx-auto px-6 lg:px-8 py-4 text-[10px] mono text-[var(--color-text-faint)] tracking-widest uppercase flex items-center justify-between">
+                <span>© {new Date().getFullYear()} · Internal distribution</span>
+                <span>Confidential</span>
+              </div>
+            </div>
+          </footer>
+        </div>
       </body>
     </html>
   );

@@ -1,287 +1,466 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* ============================================================
+   Design tokens — Dark, editorial, top-consultancy
+   Palette: deep ink + bone + warm gold accent
+   ============================================================ */
+
 @theme {
-  --color-brand-50: #f0f7ff;
-  --color-brand-100: #e0efff;
-  --color-brand-200: #baddff;
-  --color-brand-300: #7cc2ff;
-  --color-brand-400: #36a3ff;
-  --color-brand-500: #0c80f2;
-  --color-brand-600: #0064cf;
-  --color-brand-700: #004fa7;
-  --color-brand-800: #034489;
-  --color-brand-900: #083a71;
-  --color-brand-950: #06254b;
+  /* Brand — warm gold accent on near-black */
+  --color-brand-50:  #fef7e6;
+  --color-brand-100: #fceac0;
+  --color-brand-200: #f9d589;
+  --color-brand-300: #f3bd52;
+  --color-brand-400: #e5a82e;
+  --color-brand-500: #c98f1c;
+  --color-brand-600: #a47214;
+  --color-brand-700: #7f5810;
+  --color-brand-800: #5d3f0c;
+  --color-brand-900: #3a2807;
+  --color-brand-950: #1c1304;
 
-  --color-surface: #fafbfc;
-  --color-surface-alt: #f1f3f5;
-  --color-border: #e1e5ea;
-  --color-text-primary: #1a1f26;
-  --color-text-secondary: #5a6270;
-  --color-text-muted: #8b929e;
+  /* Surfaces — deep ink scale */
+  --color-surface:        #0a0b0e;
+  --color-surface-1:      #0f1115;
+  --color-surface-2:      #14171c;
+  --color-surface-3:      #1b1f25;
+  --color-surface-elev:   #1d2128;
+  --color-surface-alt:    #1b1f25;
 
-  --color-signal-red: #dc2626;
-  --color-signal-amber: #d97706;
-  --color-signal-green: #059669;
-  --color-signal-blue: #2563eb;
+  /* Lines + dividers */
+  --color-border:        rgba(255, 255, 255, 0.07);
+  --color-border-strong: rgba(255, 255, 255, 0.14);
 
-  --font-serif: "Newsreader", "Georgia", serif;
-  --font-sans: "Inter", "system-ui", sans-serif;
-  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+  /* Text — bone scale */
+  --color-text-primary:   #f3f0e8;
+  --color-text-secondary: #b8b4a9;
+  --color-text-muted:     #7e7a72;
+  --color-text-faint:     #4b4843;
+
+  /* Signal accents (refined for dark) */
+  --color-signal-green: #5fb98a;
+  --color-signal-blue:  #7da7d9;
+  --color-signal-amber: #d9a25a;
+  --color-signal-red:   #d97362;
+
+  --font-serif: "Newsreader", "Iowan Old Style", "Georgia", serif;
+  --font-sans:  "Inter", "Söhne", system-ui, sans-serif;
+  --font-mono:  "JetBrains Mono", "IBM Plex Mono", monospace;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+
+html, body {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
 }
 
 body {
   font-family: var(--font-sans);
-  color: var(--color-text-primary);
-  background: var(--color-surface);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "cv11";
 }
 
-/* Briefing article prose styling */
+::selection {
+  background: var(--color-brand-400);
+  color: var(--color-surface);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a.underline-on-hover:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--color-brand-400);
+}
+
+/* Reading progress bar (dark) */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, var(--color-brand-300), var(--color-brand-500));
+  z-index: 100;
+  transition: width 80ms linear;
+}
+
+/* ============================================================
+   Editorial chrome
+   ============================================================ */
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.editorial-display {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.serif {
+  font-family: var(--font-serif);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* Hairline divider — high-end magazine look */
+.hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-border-strong), transparent);
+}
+
+/* Glass surface — for cards */
+.glass {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0)) ,
+    var(--color-surface-1);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  transition: transform 200ms ease, border-color 200ms ease, background 200ms ease;
+}
+
+.glass:hover {
+  border-color: var(--color-border-strong);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0)) ,
+    var(--color-surface-2);
+}
+
+.glass-feature {
+  background:
+    radial-gradient(120% 80% at 0% 0%, rgba(229, 168, 46, 0.08), transparent 55%),
+    radial-gradient(120% 80% at 100% 100%, rgba(125, 167, 217, 0.05), transparent 55%),
+    var(--color-surface-1);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 18px;
+}
+
+/* Segmented control — track switcher */
+.segmented {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+}
+
+.segmented a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: all 180ms ease;
+}
+
+.segmented a:hover {
+  color: var(--color-text-primary);
+}
+
+.segmented a.active {
+  background: var(--color-text-primary);
+  color: var(--color-surface);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.05) inset, 0 4px 16px -8px rgba(0,0,0,0.6);
+}
+
+.segmented a .count {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  color: var(--color-text-muted);
+}
+
+.segmented a.active .count {
+  background: rgba(0,0,0,0.12);
+  color: var(--color-surface);
+}
+
+/* Signal number — gold-bordered badge */
+.signal-badge {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid var(--color-brand-400);
+  color: var(--color-brand-300);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(229, 168, 46, 0.06);
+}
+
+/* Pills */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-1);
+  color: var(--color-text-secondary);
+}
+
+.pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+}
+
+/* Category tag — used in detail-page breadcrumb */
+.cat-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: var(--color-brand-300);
+  background: rgba(229, 168, 46, 0.08);
+  border: 1px solid rgba(229, 168, 46, 0.25);
+}
+
+/* ============================================================
+   Briefing content — long-form editorial reading view
+   ============================================================ */
+
 .briefing-content {
   font-family: var(--font-serif);
-  font-size: 1.075rem;
+  font-size: 1.08rem;
   line-height: 1.78;
   color: var(--color-text-primary);
 }
 
+.briefing-content > *:first-child { margin-top: 0; }
+
 .briefing-content h1 {
-  font-family: var(--font-sans);
-  font-size: 2rem;
-  font-weight: 700;
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
-  color: var(--color-brand-900);
+  font-family: var(--font-serif);
+  font-size: 2.25rem;
+  font-weight: 500;
+  margin-top: 3rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-primary);
   letter-spacing: -0.025em;
+  line-height: 1.1;
 }
 
 .briefing-content h2 {
   font-family: var(--font-sans);
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-top: 3rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-top: 3.5rem;
   margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--color-brand-500);
-  color: var(--color-brand-800);
-  letter-spacing: -0.02em;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-brand-300);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
 
 .briefing-content h3 {
   font-family: var(--font-sans);
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 600;
-  margin-top: 2rem;
-  margin-bottom: 0.75rem;
+  margin-top: 2.25rem;
+  margin-bottom: 0.6rem;
   color: var(--color-text-primary);
+  letter-spacing: -0.01em;
 }
 
 .briefing-content h4 {
   font-family: var(--font-sans);
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-weight: 600;
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
   color: var(--color-text-secondary);
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 .briefing-content p {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.2rem;
+  color: var(--color-text-primary);
 }
 
 .briefing-content strong {
   font-weight: 600;
   color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.97em;
 }
 
 .briefing-content em {
   font-style: italic;
-}
-
-/* NetApp implication blocks — bold italic paragraphs */
-.briefing-content strong em,
-.briefing-content em strong {
-  display: block;
-  background: linear-gradient(135deg, var(--color-brand-50), #f8faff);
-  border-left: 4px solid var(--color-brand-500);
-  padding: 1rem 1.25rem;
-  margin: 1rem 0 1.5rem;
-  border-radius: 0 8px 8px 0;
-  font-style: italic;
-  font-weight: 500;
-  font-size: 0.95rem;
-  line-height: 1.65;
-  color: var(--color-brand-900);
-  font-family: var(--font-sans);
+  color: var(--color-text-secondary);
 }
 
 .briefing-content a {
-  color: var(--color-brand-600);
+  color: var(--color-brand-300);
   text-decoration: underline;
-  text-decoration-color: var(--color-brand-200);
+  text-decoration-color: rgba(229, 168, 46, 0.4);
   text-underline-offset: 3px;
-  transition: all 0.15s;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 150ms ease, color 150ms ease;
 }
 
 .briefing-content a:hover {
-  color: var(--color-brand-700);
-  text-decoration-color: var(--color-brand-500);
-}
-
-.briefing-content ul,
-.briefing-content ol {
-  margin: 1rem 0 1.5rem 1.25rem;
-}
-
-.briefing-content li {
-  margin-bottom: 0.5rem;
-}
-
-.briefing-content ul li {
-  list-style-type: disc;
-}
-
-.briefing-content ol li {
-  list-style-type: decimal;
+  color: var(--color-brand-200);
+  text-decoration-color: var(--color-brand-300);
 }
 
 .briefing-content blockquote {
-  border-left: 3px solid var(--color-border);
-  padding-left: 1.25rem;
+  border-left: 2px solid var(--color-brand-400);
+  background: var(--color-surface-1);
+  margin: 1.5rem 0;
+  padding: 0.9rem 1.25rem;
   color: var(--color-text-secondary);
   font-style: italic;
-  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.briefing-content hr {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-border-strong), transparent);
+  margin: 3rem 0;
+}
+
+.briefing-content ul, .briefing-content ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.briefing-content ul li, .briefing-content ol li {
+  margin-bottom: 0.45rem;
+}
+
+.briefing-content ul li::marker {
+  color: var(--color-brand-400);
 }
 
 .briefing-content code {
   font-family: var(--font-mono);
-  font-size: 0.875em;
-  background: var(--color-surface-alt);
-  padding: 0.15em 0.4em;
+  font-size: 0.85em;
+  padding: 1px 6px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
   border-radius: 4px;
-  color: var(--color-brand-700);
+  color: var(--color-brand-200);
 }
 
 .briefing-content pre {
-  background: var(--color-brand-950);
-  color: #e2e8f0;
-  padding: 1.25rem;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
+  padding: 1rem 1.25rem;
   overflow-x: auto;
-  margin: 1.5rem 0;
-  font-size: 0.875rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 
 .briefing-content pre code {
-  background: none;
+  background: transparent;
+  border: 0;
   padding: 0;
-  color: inherit;
+  color: var(--color-text-primary);
 }
 
-.briefing-content hr {
-  border: none;
-  height: 1px;
-  background: var(--color-border);
-  margin: 2.5rem 0;
-}
-
-/* Tables */
 .briefing-content table {
   width: 100%;
   border-collapse: collapse;
   margin: 1.5rem 0;
   font-family: var(--font-sans);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.briefing-content thead th {
-  background: var(--color-brand-50);
-  color: var(--color-brand-800);
-  font-weight: 600;
+.briefing-content thead {
+  background: var(--color-surface-2);
+}
+
+.briefing-content th {
   text-align: left;
+  font-weight: 600;
   padding: 0.75rem 1rem;
-  border-bottom: 2px solid var(--color-brand-200);
-  white-space: nowrap;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-.briefing-content tbody td {
-  padding: 0.65rem 1rem;
+.briefing-content td {
+  padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
   vertical-align: top;
 }
 
+.briefing-content tbody tr:last-child td {
+  border-bottom: 0;
+}
+
 .briefing-content tbody tr:hover {
-  background: var(--color-brand-50);
+  background: var(--color-surface-1);
 }
 
-/* Confidence tags inline */
-.briefing-content p,
-.briefing-content li {
-  word-wrap: break-word;
-}
+/* ============================================================
+   Subtle background grain — gives the deep ink a tactile feel
+   ============================================================ */
 
-/* Table of Contents styling */
-.briefing-content ol:first-of-type {
-  background: var(--color-surface-alt);
-  border-radius: 10px;
-  padding: 1.25rem 1.25rem 1.25rem 2.5rem;
-  border: 1px solid var(--color-border);
-}
-
-/* Signal number badges */
-.signal-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
-  background: var(--color-brand-500);
-  color: white;
-  border-radius: 50%;
-  font-size: 0.8rem;
-  font-weight: 700;
-  margin-right: 0.5rem;
-  flex-shrink: 0;
-}
-
-/* Scroll progress bar */
-.progress-bar {
+.grain {
   position: fixed;
-  top: 0;
-  left: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--color-brand-500), var(--color-brand-400));
-  z-index: 100;
-  transition: width 0.1s;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  z-index: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 
-/* Card hover effects */
-.briefing-card {
-  transition: all 0.2s ease;
-  border: 1px solid var(--color-border);
-}
+/* ============================================================
+   Utility
+   ============================================================ */
 
-.briefing-card:hover {
-  border-color: var(--color-brand-300);
-  box-shadow: 0 8px 30px rgba(12, 128, 242, 0.08);
-  transform: translateY(-2px);
-}
-
-/* Print styles */
-@media print {
-  .briefing-content {
-    font-size: 11pt;
-    line-height: 1.5;
-  }
-
-  .briefing-content h2 {
-    page-break-after: avoid;
-    border-bottom-color: #000;
-  }
-
-  .briefing-content table {
-    font-size: 9pt;
-  }
+.text-balance {
+  text-wrap: balance;
 }
