@@ -1,278 +1,224 @@
 # Weekly AI & Compute Innovation Briefing
-## Date Range: Monday 11 May – Sunday 17 May 2026 (covering items 8 May – 15 May 2026)
-> *Research methodology: 3× Claude WebSearch passes (28 queries) + 1× Perplexity deep research, synthesised and deduplicated. Items flagged ⚠️ are single-source.*
+## Date Range: Monday 11 May – Sunday 17 May 2026
+> *Research methodology: 3× Claude WebSearch passes (Models/Software, Hardware/Infra, Research/Policy) + 1× Perplexity deep search, synthesised and deduplicated. Items flagged ⚠️ *single-source* appeared in only one pass and should be verified before citing.*
 
 ---
 
 ### Executive Summary
 
-- **NVIDIA's "Project Glasswing" / Claude Mythos Preview surfaces** as Anthropic gives select hyperscalers early access to its vulnerability-finding model — the model reportedly surfaced thousands of zero-days during testing, while Google separately disclosed an in-the-wild AI-generated zero-day exploit attempt this week.
-- **Cerebras's blockbuster IPO (May 14, 2026)** — shares opened >100% above the $185 IPO price, raising ~$5.55B and validating wafer-scale inference silicon at a ~$50B market cap; the largest US AI-infrastructure listing of 2026 to date.
-- **Anthropic overtakes OpenAI in US enterprise AI spend** (Ramp AI Index, May 2026 release): Claude paid-customer share rose to 34.4% vs. OpenAI's 32.3%, while Anthropic is reportedly in talks for a $30–50B round at a ~$950B valuation — surpassing OpenAI's March $854B mark.
-- **Google DeepMind's Gemma 4 open-weight family released** (May 13–15, 2026), claimed as Google's most capable open model series to date and paired with a Kaggle "Gemma 4 Good Challenge".
-- **POET Technologies + Lumilens announce wafer-level photonic interposer partnership (May 14, 2026)** with a >$500M five-year purchase trajectory and engineering samples in late 2026, targeting the optical-engine bottleneck for hyperscale AI fabrics.
+- **Cybersecurity becomes the AGI-era safety flashpoint.** Anthropic launched **Project Glasswing** with Claude Mythos Preview (AWS, Apple, Google, Microsoft, NVIDIA, JPMorgan, CrowdStrike, Cisco, Broadcom, Palo Alto Networks and the Linux Foundation as launch partners; +Verizon on 15 May), while OpenAI countered with **Daybreak** and three specialised GPT-5.5 variants (GPT-5.5, GPT-5.5 with Trusted Access for Cyber, GPT-5.5-Cyber). The UK AI Security Institute reported frontier models executing **32-step end-to-end autonomous cyberattack chains** with no human-in-the-loop.
+- **Cerebras' blockbuster IPO** raised **$5.55B at $185/share**, popped 68% to close at $311.07 (intraday peak +108% at $385), valuing the company at **~$95B**; demand was reportedly **20×+ oversubscribed**. It crystallises a public market for non-NVIDIA AI silicon and follows NVIDIA's late-2025 acquisition of Groq for ~$20B.
+- **Perceptron Mk1**, a frontier video/embodied-reasoning model, launched on 12 May at **$0.15 / $1.50 per 1M input/output tokens** — 80-90% cheaper than Gemini Pro / Claude / GPT for video tasks — with native 2 FPS video processing across a 32K-token context.
+- **Anthropic + Gates Foundation $200M four-year partnership** (announced 14 May) targets global health (polio, HPV, eclampsia), education, smallholder agriculture and economic mobility, with the Anthropic share delivered as Claude credits + technical staff.
+- **Recursive Superintelligence** emerged from stealth on 13 May with **$650M at a $4.65B valuation** (GV and Greycroft leading, NVIDIA and AMD participating; Richard Socher CEO, Yuandong Tian co-founder, Peter Norvig adviser) to build self-improving AI systems with a "Level 1" autonomous trainer planned for mid-2026.
 
 ---
 
 ### 1. Foundation Models & LLMs
 
-**Google DeepMind — Gemma 4 (open weights)** — DeepMind released Gemma 4, billed as its most capable open-source family, in multiple sizes targeting both edge and frontier-class workloads, accompanied by a Kaggle "Gemma 4 Good Challenge". Parameter counts and benchmark tables not yet pinned down in this week's coverage; refer to the official model card. [SMBtech, May 15 2026](https://smbtech.au/news/google-deepmind-releases-gemma-4-its-most-capable-open-source-ai-models/)
+**Claude Mythos Preview (Anthropic)** — A new general-purpose frontier model that is "strikingly capable at computer security tasks." Anthropic disclosed that over the preceding weeks Mythos Preview had been used internally to identify **thousands of zero-day vulnerabilities** (many critical) across every major OS and browser. Mythos has limited rollout via Project Glasswing rather than a public release. [Anthropic — Claude Mythos Preview](https://red.anthropic.com/2026/mythos-preview/) · [Project Glasswing](https://www.anthropic.com/glasswing)
 
-**Google — Gemini 3.1 Flash Lite (May 8, 2026)** — A lightweight tier slotting below the Gemini 3 Deep Think family, aimed at high-throughput inference on consumer surfaces. [LLM-Stats Updates](https://llm-stats.com/llm-updates)
+**GPT-5.5 family expansion (OpenAI)** — In the context of the Daybreak launch (11 May), OpenAI confirmed three deployment variants: **GPT-5.5** (standard general-purpose with safeguards), **GPT-5.5 with Trusted Access for Cyber** (verified defensive use in authorised environments), and **GPT-5.5-Cyber** (permissive variant for red-teaming, pentesting and validation). [The Hacker News](https://thehackernews.com/2026/05/openai-launches-daybreak-for-ai-powered.html) · [OpenAI Daybreak](https://openai.com/daybreak/)
 
-**Alibaba — Qwen3 Coder Next (May 13, 2026)** — New coding-focused checkpoint in the Qwen3 family, dropped alongside the open-weight Qwen3.6-27B / Qwen3.6-35B which on the May 12 LiveBench snapshot scored 71.78 Coding Avg and 50.00 Agentic Coding Avg. [LLM-Stats](https://llm-stats.com/llm-updates) · [llm-stats news](https://llm-stats.com/ai-news)
+**Anthropic enterprise share crosses OpenAI** ⚠️ *single-source* — Per the Ramp AI Index (week of 11 May), Anthropic reached **34.4%** of enterprise AI adoption versus OpenAI's **32.3%**, the first time Anthropic has led; the swing is attributed largely to Claude Code usage in dev/ITSM workflows. [Champaign Magazine summary](https://champaignmagazine.com/2026/05/17/ai-by-ai-weekly-top-5-may-11-17-2026/)
 
-**MiniMax — M2.5 Highspeed, M2.7 Highspeed, M2.7 (May 13, 2026)** — Three near-simultaneous releases focused on inference throughput. ⚠️ *single-source* [LLM-Stats](https://llm-stats.com/llm-updates)
+**Gemini 3.1 (Google DeepMind) — AI co-mathematician** — DeepMind's Gemini-3.1-based agentic "AI co-mathematician" set a new high on a long-standing math benchmark, and one mathematician reportedly cracked a previously unsolved problem using a strategy buried in a proof initially rejected by the system's reviewers. (Public detail ahead of Google I/O on 19 May.) [TheRundown summary](https://www.therundown.ai/p/google-deepmind-powerful-ai-co-mathematician)
 
-**Inception — Mercury 2** — Described as the world's fastest reasoning language model, claiming >5× faster generation through parallel refinement. [Inception Labs blog](https://www.inceptionlabs.ai/blog/introducing-mercury-2)
+**Pre-I/O Gemini build-up** — Reporting through 14–17 May points to a major Gemini upgrade (variously reported as **Gemini 3.5** or a full **Gemini 4.0** with an "Omni" video model variant) due at I/O 2026 on 19 May, alongside **Gemini Spark** (always-on assistant) and **Gemini Intelligence** OS-layer agents on Samsung/Pixel from summer 2026. [Android Authority](https://www.androidauthority.com/what-to-expect-from-google-io-2026-3664979/) · [AIxploria](https://www.aixploria.com/en/ai-radar/google-io-2026-gemini-announcements-preview/)
 
-**Anthropic — Claude "Mythos Preview" via Project Glasswing** — Anthropic granted major tech firms preview access to Claude Mythos for vulnerability discovery; during evaluation the model reportedly surfaced thousands of zero-day vulnerabilities. [MarketingProfs — AI Update, May 8 2026](https://www.marketingprofs.com/opinions/2026/54655/ai-update-may-8-2026-ai-news-and-views-from-the-past-week)
+**Anthropic valuation talks** — Anthropic continued discussions around a **~$50B round at a $900B–$950B valuation** (vs $380B in February), potentially eclipsing OpenAI's $852B March valuation; the round was expected to close as early as end of May. [TechCrunch](https://techcrunch.com/2026/04/29/sources-anthropic-could-raise-a-new-50b-round-at-a-valuation-of-900b/) · [PYMNTS](https://www.pymnts.com/news/artificial-intelligence/2026/anthropic-valuation-could-eclipse-openai-50-billion-dollar-funding-round/)
 
-**Meta — frontier model release + $115–135B 2026 capex plan** — Meta announced a proprietary frontier model and confirmed an annual AI capex range of $115–135B for 2026. ⚠️ *single-source* [MarketingProfs](https://www.marketingprofs.com/opinions/2026/54655/ai-update-may-8-2026-ai-news-and-views-from-the-past-week)
-
----
+**No new Meta, xAI or Mistral frontier model in-window.** Existing context: Grok 4.3 (xAI, 6 May), Mistral Small 4 and Mistral Medium 3.5 were the most recent flagship releases prior to the window. ZAYA1-8B (Zyphra, 6-7 May) — an Apache-2.0 MoE trained end-to-end on AMD Instinct hardware — remained the freshest AMD-native open model heading into the window. [llm-stats.com](https://llm-stats.com/llm-updates)
 
 ### 2. Reasoning & Agents
 
-**Sakana AI — RL Conductor (7B)** — A 7B-parameter orchestration model trained via reinforcement learning to route tasks dynamically across GPT-5, Claude Sonnet 4, Gemini 2.5 Pro, and open-source models — replacing rigid rule-based workflows. [MarketingProfs](https://www.marketingprofs.com/opinions/2026/54786/ai-update-may-15-2026-ai-news-and-views-from-the-past-week)
+**OpenAI Daybreak** — Launched **11 May** as OpenAI's cybersecurity platform: Codex Security builds a project-specific threat model from a connected GitHub repo, searches for vulnerabilities via LLM reasoning, pressure-tests in an isolated sandbox, and proposes targeted patches for human review. Launch partners include Akamai, Cisco, Cloudflare, CrowdStrike, Fortinet, Oracle, Palo Alto Networks and Zscaler. [The Hacker News](https://thehackernews.com/2026/05/openai-launches-daybreak-for-ai-powered.html) · [OpenAI](https://openai.com/daybreak/)
 
-**Cloudflare — Autonomous Agents** — Cloudflare announced Agents that can autonomously create Cloudflare accounts, purchase domains, and deploy applications, framed as the move from "assistant tools" to "autonomous executors". [cogitx.ai overview](https://cogitx.ai/blog/ai-agents-complete-overview-2026)
+**OpenAI Deployment Company** — Launched **11 May**: a holding-style entity to put Forward Deployed Engineers into large enterprises and run secured/partitioned model deployments, including local on-Windows sandboxed surfaces. OpenAI agreed to acquire **Tomoro** to seed the FDE bench. [OpenAI](https://openai.com/index/openai-launches-the-deployment-company/) · [CNBC](https://www.cnbc.com/2026/05/11/open-ai-dresser-enterprise-business.html)
 
-**Google — Gemma 4 Multi-Token Prediction (MTP)** — MTP enables multiple-token prediction in lock-step with draft models for speculative decoding. ⚠️ *single-source* [cogitx.ai](https://cogitx.ai/blog/ai-agents-complete-overview-2026)
+**DeepMind AI co-mathematician (agentic Gemini 3.1)** — Plan-act-observe loop tackling open conjectures; the rejected-proof-derived solution is noteworthy as evidence that agentic systems are producing genuinely novel intermediate artefacts. [TheRundown](https://www.therundown.ai/p/google-deepmind-powerful-ai-co-mathematician)
 
-**NVIDIA + Hermes Agent on RTX / DGX Spark** — NVIDIA highlighted Hermes (a self-improving agent framework, reportedly >140k GitHub stars in 3 months) running on RTX and DGX Spark, paired with Qwen 3.6 27B/35B which NVIDIA claims outperform earlier 120B/400B variants. [NVIDIA blog](https://blogs.nvidia.com/blog/rtx-ai-garage-hermes-agent-dgx-spark/)
-
-**Anthropic — Claude Managed Agents** — Out-of-the-box infrastructure for enterprises to build, deploy, and scale autonomous agents. [TechCrunch, May 4 2026](https://techcrunch.com/2026/05/04/anthropic-and-openai-are-both-launching-joint-ventures-for-enterprise-ai-services/)
-
-**MCP standardisation** — Model Context Protocol is now widely supported across VS Code, JetBrains, and third-party platforms, cementing its position as the agent-to-tool integration standard. [cogitx.ai](https://cogitx.ai/blog/ai-agents-complete-overview-2026)
-
----
+**Enterprise agent platform launches (week of 11–17 May)** ⚠️ *single-source* (Agentic.ai roundup): **Xactly Fleet of Agents / Intelligence Studio** (Upside 2026, 14 May), **Freshworks AI Agent Studio in Freshservice** (Refresh 2026, 14 May), **Helport AI Labor** website (14 May), **ERP.net Operator.net** for in-stack ERP/CRM agents, **Lenovo AI Library** under Hybrid AI Advantage, **LTIMindtree BlueVerse M.A.X on Salesforce** (15 May, targeting ~30% marketing-ops efficiency). [Agentic.ai roundup](https://agentic.ai/news) · [Champaign Magazine](https://champaignmagazine.com/2026/05/17/ai-by-ai-weekly-top-5-may-11-17-2026/)
 
 ### 3. Multimodal AI
 
-**Google — Gemini Omni (early app tests, May 12, 2026)** — Google's unreleased Gemini Omni video model surfaced in early Gemini app testing, supporting video remix, in-chat edits, and high-fidelity text-to-video; early testers rate it slightly above Runway Gen-3 on prompt adherence. Expected formal unveil at I/O 2026. [explainX](https://www.explainx.ai/blog/google-gemini-omni-video-model-io-2026)
+**Perceptron Mk1** — Released **12 May**, this video and embodied-reasoning model processes native video at up to **2 FPS over a 32K-token context window**, maintaining object identity across occlusions and returning structured outputs (timecodes, clips, points, bounding boxes). Pricing is **$0.15/M input, $1.50/M output** — Perceptron claims comparable image/video/embodied reasoning to Gemini Pro at ~10–20% of frontier-lab prices. Now available on OpenRouter and Puter.js. [Perceptron](https://www.perceptron.inc/blog/introducing-perceptron-mk1) · [VentureBeat](https://venturebeat.com/technology/perceptron-mk1-shocks-with-highly-performant-video-analysis-ai-model-80-90-cheaper-than-anthropic-openai-and-google) · [BenchLM](https://benchlm.ai/blog/posts/perceptron-mk1-frontier-video-models)
 
-**Top open VLMs as of mid-May 2026** — GLM-4.5V, GLM-4.1V-9B-Thinking, and Qwen2.5-VL-32B-Instruct lead community benchmarks on multimodal chat and visual reasoning. [BentoML](https://www.bentoml.com/blog/multimodal-ai-a-guide-to-open-source-vision-language-models)
-
-**SenseNova-U1 (SenseNova + Light-AI)** — A native unified multimodal model based on the NEO-unify architecture that processes pixels and words jointly, posting competitive scores across multimodal benchmarks. ⚠️ *single-source* [arXiv listing](https://arxiv.org/list/cs.AI/recent)
-
----
+**DeepMind Magic Pointer** — Posted **12 May**: an AI-augmented cursor that "understands what you are looking at, listens to your voice, derives the context, and acts with Gemini" — slated to ship in the new "Googlebook" / Aluminium OS hardware later in 2026. The cursor-as-agent surface is a notable HID-layer interaction pattern. [DeepMind summary](https://pasqualepillitteri.it/en/news/2504/google-magic-pointer-deepmind-gemini-guide-2026)
 
 ### 4. Open Source & Ecosystem
 
-**xAI — X Algorithm Open Source major update (May 15, 2026)** — First fully runnable end-to-end version of the X recommendation stack, including a "Mini Phoenix" transformer (256-dim embeddings, 4 heads, 2 layers, ~3 GB via Git LFS) under Apache 2.0; codebase ~57% Rust / 43% Python. Production weights remain closed. [Pillitteri write-up](https://pasqualepillitteri.it/en/news/2594/x-algorithm-open-source-may-2026)
+**No major new open-weight frontier release inside the 11–17 May window** based on cross-pass evidence. Context: the leading open-weight model on Artificial Analysis's Intelligence Index remained **GLM 5.1** (744B-param MoE, 40B active, 200K context); Qwen3, Kimi K2.6 (~1.1T params, modified MIT) and Meta's CWM (32B, 131k context; 65.8% on SWE-bench Verified, 68.6% LiveCodeBench, 96.6% Math-500, 76.0% AIME 2024) were the freshest reference points. [llm-stats.com](https://llm-stats.com/llm-updates) · [HuggingFace state-of-OSS](https://huggingface.co/blog/huggingface/state-of-os-hf-spring-2026) · [Meta AI: CWM](https://ai.meta.com/research/publications/cwm-an-open-weights-llm-for-research-on-code-generation-with-world-models/)
 
-**Open-weight coding model leaderboard (May 12, 2026 LiveBench snapshot)** — Kimi K2.6 Thinking leads open coding at 78.57 Coding Avg / 58.33 Agentic Coding Avg; DeepSeek-V4 Pro (1.6T total / 49B active) and Flash (284B / 13B active) — both 1M context, MIT-licensed — released April 24; MiMo-V2.5-Pro (1.02T / 42B active) from Xiaomi is the new open-weight flagship for agentic coding. [LLM-Stats](https://llm-stats.com/ai-news) · [Kilo.ai roundup](https://kilo.ai/open-source-models)
-
-**vLLM TPU Backend** — vLLM's TPU path now uses JAX as the lowering layer for all vLLM models, even those originally written in PyTorch, delivering measurable throughput gains. [vLLM blog](https://blog.vllm.ai/2025/10/16/vllm-tpu.html)
-
-**PyTorch/XLA 2.7** — Ships Pallas-based ragged paged attention with up to 5× speedup vs. the prior implementation for Llama-3-8B mixed prefill/decode, plus a JAX bridge. [PyTorch blog](https://pytorch.org/blog/pytorch-xla-2-7-release-usability-vllm-boosts-jax-bridge-gpu-build/)
-
-**Hugging Face — State of Open Source: Spring 2026** — Latest blog quantifies South Korea's National Sovereign AI Initiative producing three simultaneously trending models on the Hub in February 2026, and revisits a year since the "DeepSeek moment". [HF blog](https://huggingface.co/blog/huggingface/state-of-os-hf-spring-2026)
-
-**Osaurus (May 15, 2026)** — Mac-native hybrid client that can route between local models (Ollama / Metal) and cloud APIs (OpenAI, Anthropic), keeping memory, files, and tools on-device by default. [TechCrunch](https://techcrunch.com/2026/05/15/osaurus-brings-both-local-and-cloud-ai-models-to-your-mac/)
-
----
+**ggml.ai joins Hugging Face** ⚠️ *date partly outside window* — Georgi Gerganov announced earlier in May that ggml.ai (the project behind llama.cpp) is joining Hugging Face while remaining open; the team continues maintenance full-time. [Adafruit](https://blog.adafruit.com/2026/02/20/open-source-ai-ggml-joins-hugging-face-llama-cpp-stays-open-local-ais-long-term-home/)
 
 ### 5. AI Infrastructure & Systems
 
-**Inference now dominates AI compute spend** — Early-2026 figures show inference workloads consuming >55% of AI-optimised infrastructure spending, projected to hit 70–80% by year-end. [SDxCentral](https://www.sdxcentral.com/analysis/ai-inferencing-will-define-2026-and-the-markets-wide-open/)
+**Inference-centric infrastructure pivot** — Industry analyses through May 2026 converged on inference now accounting for **>55% of AI-optimised infra spend**, projected to hit **70–80%** by year-end. Inference now represents **>80% of AI GPU spend** at production scale, with training racks pushing toward **1 MW** in frontier systems vs. **30–150 kW** for inference racks. [Data Center Knowledge](https://www.datacenterknowledge.com/networking/ai-inference-the-next-stress-test-for-global-data-center-infrastructure) · [Deloitte](https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/ai-infrastructure-compute-strategy.html)
 
-**Rack power-density step-changes** — Vera Rubin NVL144 systems are landing at 300+ kW/rack in 2026 (vs. Blackwell GB300's 163 kW); Rubin Ultra NVL576 projected >600 kW/rack by 2027. [Data Center Knowledge](https://www.datacenterknowledge.com/build-design/data-center-world-2026-ai-pushes-infrastructure-to-new-limits)
+**CoreWeave–Meta $21B expanded agreement (through Dec 2032)** — Includes some of the first NVIDIA Vera Rubin deployments. Combined with NVIDIA's multi-year multi-generational partnership with Meta (covering on-prem, cloud and millions of Blackwell + Rubin GPUs plus NVIDIA CPUs and networking), the week's posture confirms Meta as a top-tier Vera Rubin launch customer. [CoreWeave 8-K](https://www.sec.gov/Archives/edgar/data/1769628/000176962826000154/ex991.htm) · [NVIDIA Newsroom: Meta](https://nvidianews.nvidia.com/news/meta-builds-ai-infrastructure-with-nvidia)
 
-**Google Cloud Managed Lustre** — Now delivers 10 TB/s bandwidth, 10× year-on-year improvement. [Google Cloud blog](https://cloud.google.com/blog/products/compute/ai-infrastructure-at-next26)
-
-**Kneron warning on inference bottleneck (May 12, 2026)** — Kneron flagged an impending inference-capacity crunch given how quickly serving demand is outpacing chip lead-times. ⚠️ *single-source* [Manila Times](https://www.manilatimes.net/2026/05/12/tmt-newswire/globenewswire/kneron-warns-the-ai-industry-is-approaching-a-massive-inference-infrastructure-bottleneck/2341273)
-
-**Alphabet record Yen bond sale** — Funds earmarked for data-centre and AI-infrastructure expansion; signal of continued capex appetite despite rates pressure on AI equities this week. [Tastylive](https://www.tastylive.com/news-insights/the-daily-bond-selloff-oil-above-109-and-the-first-real-rates-test-for-ai)
-
----
+**Defense AI capital surge** ⚠️ *single-source* — Week of 11 May saw **$6.2B in defense-AI venture funding (44% of total VC for the week)**; excluding Anduril and Helsing, non-defense AI funding shrank ~53% week-over-week per StartupHub.ai. [StartupHub](https://www.startuphub.ai/ai-news/ai-news/2026/defense-ai-6-2-billion-week-may-11-2026)
 
 ### 6. Compute Hardware
 
-**Cerebras IPO (May 14, 2026)** — Cerebras priced at $185/share (above range), raising ~$5.55B; shares opened >100% above the IPO price, valuing the company near $50B. WSE-3 wafer-scale inference engine continues to break records (1,000+ tok/s on Llama 3.1-405B). [Fortune](https://fortune.com/2026/05/14/cerebras-one-of-the-biggest-ipos-of-the-year/) · [Motley Fool](https://www.fool.com/investing/2026/05/13/should-you-buy-the-cerebras-ipo-heres-how-the-ai-c/)
+**Cerebras IPO (Nasdaq: CBRS) — 14 May** — Priced at **$185, raised $5.55B** (largest tech IPO since Uber 2019), opened at **$350 (intraday peak $385, +108%)**, closed up 68% at **$311.07**, market cap **~$95B**; demand >20× oversubscribed. CEO Andrew Feldman's stake worth ~**$3.2B**; CTO Sean Lie's ~**$1.7B**. Cerebras has separately agreed to supply OpenAI with **~750 MW of compute capacity for ~$20B** plus advance funding. AWS announced plans to combine Trainium3 + Cerebras WSE-3 for inference. The stock pulled back the next session on profit-taking. [CNBC: IPO debut](https://www.cnbc.com/2026/05/14/cerebras-cbrs-stock-trade-nasdaq-ipo.html) · [TechCrunch](https://techcrunch.com/2026/05/14/cerebras-raises-5-5b-kicking-off-2026s-ipo-season-with-a-bang/) · [The Register](https://www.theregister.com/ai-ml/2026/05/15/cerebras-wafer-scale-ai-bet-delivers-blockbuster-ipo/5240821) · [Bloomberg](https://www.bloomberg.com/news/articles/2026-05-14/cerebras-shares-indicated-to-surge-89-after-year-s-top-ipo)
 
-**NVIDIA Vera Rubin platform — production update** — Seven new chips in full production (Vera CPU, Rubin GPU, NVLink 6 Switch, ConnectX-9 SuperNIC, BlueField-4 DPU, Spectrum-6 Ethernet switch, plus integrated NVIDIA Groq 3 LPU). Vendor partners ship Rubin-based systems in H2 2026; claims 10× lower inference token cost and 4× fewer GPUs for MoE training vs. Blackwell. NVIDIA Q1 FY27 earnings on May 20 will be the next live update. [NVIDIA newsroom](https://nvidianews.nvidia.com/news/nvidia-vera-rubin-platform)
+**NVIDIA Vera Rubin platform — momentum into the week** — Six-chip Rubin platform (Vera CPU + Rubin GPU + NVLink 6 Switch + ConnectX-9 SuperNIC + BlueField-4 DPU + Spectrum-6 Ethernet + integrated NVIDIA Groq 3 LPU) is in full production. Claims include up to **10× reduction in inference token cost** and **4× fewer GPUs to train MoE models** vs. Blackwell. Vera Rubin introduces a **combined GPU-HBM (CG-HBM)** memory design stacking memory directly on the chip. First cloud deployments: AWS, Google Cloud, Microsoft, OCI, CoreWeave, Lambda, Nebius and Nscale. [NVIDIA Newsroom](https://nvidianews.nvidia.com/news/rubin-platform-ai-supercomputer)
 
-**AMD MI400 / MI455X momentum** — MI400 ships H2 2026, ramping into 2027; CES 2026 unveiled the Helios AI server rack pairing 72× MI455X to challenge NVL72. AMD's MI430X carries 432 GB HBM4 at 19.6 TB/s. [Tom's Hardware](https://www.tomshardware.com/pc-components/gpus/hbm4-memory-to-double-speeds-in-2026-2048-bit-interface-to-revolutionize-artificial-intelligence-and-hpc-markets-report)
+**Recursive Superintelligence stealth exit — 13 May** — Raised **$650M at a $4.65B valuation**, led by GV and Greycroft with NVIDIA and AMD participating. Founded by Richard Socher (ex-Salesforce AI) and Yuandong Tian (ex-Meta FAIR), with Peter Norvig as adviser. Target: a "Level 1" autonomous self-improving trainer with a public launch targeted for mid-2026. [TechCrunch](https://techcrunch.com/2026/05/14/what-happens-when-ai-starts-building-itself/) · [Tech.eu](https://tech.eu/2026/05/13/recursive-superintelligence-emerges-from-stealth-with-650m-raise/)
 
-**Intel hybrid AI processor** — Intel quietly reintroduced a hybrid AI processor to its roadmap, combining an x86 CPU with fixed-function AI acceleration and programmable IP; stock continues its run (up 33% in early May after doubling in April). [Tom's Hardware](https://www.tomshardware.com/tech-industry/artificial-intelligence/intels-roadmap-adds-mysterious-hybrid-ai-processor-featuring-x86-cpus-dedicated-ai-accelerator-and-programmable-ip-chip-may-capitalize-on-a-market-forgotten-by-nvidia-and-amd) · [CNBC](https://www.cnbc.com/2026/05/08/wall-street-ai-chip-love-moves-from-nvidia-to-intel-amd-and-micron.html)
-
-**Applied Materials guidance** — >30% growth in semiconductor-equipment sales projected for 2026, driven by HBM and AI accelerator demand. ⚠️ *single-source* [Tastylive](https://www.tastylive.com/news-insights/the-daily-bond-selloff-oil-above-109-and-the-first-real-rates-test-for-ai)
-
----
+**AMD MI400 series momentum (context)** — MI400/MI450/Helios (MI455X) on track for H2-2026 launch with volumes ramping into 2027. MI430X carries **432 GB of HBM4** at **19.6 TB/s** (CDNA 5). Intel's **Crescent Island** inference GPU (Xe3P, **160 GB LPDDR5X**) is sampling in H2-2026. AMD and Intel were the dominant AI-chip-rotation trade through April–May, with Intel up ~240% YTD on AI exposure plus a new Apple manufacturing deal. [S&P Global](https://www.spglobal.com/market-intelligence/en/news-insights/research/2026/03/amd-s-next-generation-ai-chips-set-to-power-2026-data-center-growth) · [CNBC](https://www.cnbc.com/2026/05/08/wall-street-ai-chip-love-moves-from-nvidia-to-intel-amd-and-micron.html)
 
 ### 7. Memory & Storage
 
-**HBM4 production landscape** — HBM4 mass production has commenced in 2026 with 16-Hi stacks targeted for Q4 2026; full-year 2026 capacity reportedly sold out. Per-stack peaks: 3.3 TB/s bandwidth, 64 GB capacity, 2048-bit interface — roughly 2× HBM3E. Global HBM market projected $58B in 2026 vs. $38B in 2025. [Tom's Hardware](https://www.tomshardware.com/pc-components/gpus/hbm4-memory-to-double-speeds-in-2026-2048-bit-interface-to-revolutionize-artificial-intelligence-and-hpc-markets-report) · [Introl blog](https://introl.com/blog/ai-memory-supercycle-hbm-2026)
+**HBM4 status entering the window** — HBM4 is in **mass production from all three suppliers** (SK hynix, Samsung, Micron), with **16-Hi stacks targeting Q4 2026**. **Full-year 2026 HBM4 production is sold out.** Bandwidth: up to **3.3 TB/s per stack** on a **2048-bit interface, 32 channels** (vs HBM3E's 1.2 TB/s / 36 GB); capacity to **64 GB/stack**. Designed-in: NVIDIA Rubin (up to **288 GB HBM4**), AMD MI430X (**432 GB HBM4 / 19.6 TB/s**). [Tom's Hardware](https://www.tomshardware.com/pc-components/gpus/hbm4-memory-to-double-speeds-in-2026-2048-bit-interface-to-revolutionize-artificial-intelligence-and-hpc-markets-report) · [Introl](https://introl.com/blog/ai-memory-supercycle-hbm-2026)
 
-**NVIDIA paying double for Samsung HBM4** — Reports indicate NVIDIA is paying roughly 2× prior HBM pricing for Samsung HBM4 modules at 3.3 TB/s; potential GPU ASP pass-through implications. [NotebookCheck](https://www.notebookcheck.net/Nvidia-may-raise-prices-as-it-pays-Samsung-double-for-future-HBM4-AI-memory-modules-with-3-3-TB-s-bandwidth.1172580.0.html)
+**Samsung CXL 3.1 (CMM-D) — Q4 mass production targeted** — 1 TB modules at **72 GB/s on PCIe 6.0**, double CXL 2.0's throughput. Penguin/Marvell analyses note that **CXL memory pooling delivered 3.8× speedup over 200G RDMA / 6.5× over 100G RDMA** for inference KV-cache offload; >90% of new servers are now CXL-capable. [The Korea Herald](https://www.koreaherald.com/article/10737182) · [Marvell](https://www.marvell.com/company/newsroom/marvell-next-gen-cxl-switch-memory-pooling-breaks-ai-memory-wall.html)
 
-**HBM Shift-Left testing (SemiEngineering, May 12, 2026)** — Memory vendors are pushing test steps earlier in the flow to preserve yield on rising HBM stack heights, trading higher test costs for better yields critical to AI GPU economics. [SemiEngineering](https://semiengineering.com/hbm-shifts-testing-left-to-preserve-ai-chip-yield/)
-
-**CXL 3.1 mass production prep** — Samsung is preparing Q3 2026 mass production of CXL 3.1 modules; Marvell announced a 260-lane CXL switch for rack-level memory pooling, sampling Q3 2026. CXL is now present in >90% of newly shipped servers; KV-cache offload from GPU VRAM to CXL is the highest-impact near-term use case. [Korea Herald](https://www.koreaherald.com/article/10737182) · [Marvell newsroom](https://www.marvell.com/company/newsroom/marvell-next-gen-cxl-switch-memory-pooling-breaks-ai-memory-wall.html)
-
----
+**SemiAnalysis read** — Margin dynamics for HBM have reversed in 2026; customers will likely pay above contracted prices for incremental supply. N3 utilisation is heading **>100%** in H2-2026; DRAM fabs running **>90%**. [SemiAnalysis: AI Silicon Shortage](https://newsletter.semianalysis.com/p/the-great-ai-silicon-shortage)
 
 ### 8. Networking & Interconnects
 
-**POET Technologies + Lumilens — wafer-level photonic interposer (May 14, 2026)** — Strategic JDA on the Electrical-Optical Interposer (EOI), built on active-alignment-free wafer-scale optical-engine production. Engineering samples late 2026, ramp 2027, with a >$500M five-year cumulative purchase trajectory. [GlobeNewswire](https://www.globenewswire.com/news-release/2026/05/14/3294762/0/en/poet-technologies-and-lumilens-advance-wafer-level-photonic-integration-for-next-generation-ai-optical-networks.html)
+**POET Technologies × Lumilens — 14 May** — Strategic partnership for wafer-level photonic integration for next-gen AI optical networks. Lumilens placed an **initial $50M PO** with potential to scale to **$500M+ cumulative over five years**; active-alignment-free wafer-scale manufacturing aimed at displacing the largest cost/yield bottleneck in optical engines. Engineering samples late 2026; hyperscaler production ramp aligned to 2027. [POET press release](https://www.poet-technologies.com/news/poet-technologies-and-lumilens-advance-wafer-level-photonic-integration-for-next-generation-ai-optical-networks) · [GlobeNewswire (14 May)](https://www.globenewswire.com/news-release/2026/05/14/3294762/0/en/poet-technologies-and-lumilens-advance-wafer-level-photonic-integration-for-next-generation-ai-optical-networks.html)
 
-**UALink roadmap** — UALink 2.0 spec ahead of 1.0 silicon; Upscale AI targeting late-2026 first UALink switch; Supermicro / HPE early UALink-fabric systems target 2026 for multi-rack MI350X clusters. Two-tier model emerging: UALink intra-pod, UEC-Ethernet inter-pod. [HPCwire](https://www.hpcwire.com/2025/12/02/upscale-ai-eyes-late-2026-for-scale-up-ualink-switch/) · [The Register](https://www.theregister.com/on-prem/2026/04/07/ualink-delivers-20-spec-before-v-10-silicon-ships/5228485)
-
-**NVIDIA Quantum-X InfiniBand** — Switches launching early 2026 at 115 Tb/s per switch, 144× 800 Gb/s ports. Spectrum-X Ethernet platform extends InfiniBand-like behaviour to Ethernet-based AI fabrics. [Network World](https://www.networkworld.com/article/4050881/nvidia-networking-roadmap-ethernet-infiniband-co-packaged-optics-will-shape-data-center-of-the-future.html)
-
-**Ethernet trajectory** — Forecasters now expect 91% of AI workloads to run on Ethernet by 2029 as Ultra Ethernet (UEC) closes the gap with InfiniBand at scale. [DriveNets](https://drivenets.com/blog/why-infiniband-falls-short-of-ethernet-for-ai-networking/)
-
----
+**Co-packaged optics roadmap** — NVIDIA is bringing CPO into Ethernet with **Spectrum-X Photonics** in H2-2026; **Quantum-X InfiniBand switches** ship in early 2026 at **115 Tb/s per switch (144 × 800 Gb/s)**. Marvell continues to integrate **Celestial AI** photonic fabric IP; UALink hardware (rack-scale, up to **1,024 accelerators per pod**) is expected late 2026 (Upscale AI Q4-2026 target). [Tom's Hardware](https://www.tomshardware.com/networking/nvidia-outlines-plans-for-using-light-for-communication-between-ai-gpus-by-2026-silicon-photonics-and-co-packaged-optics-may-become-mandatory-for-next-gen-ai-data-centers) · [HPCwire: Upscale AI](https://www.hpcwire.com/2025/12/02/upscale-ai-eyes-late-2026-for-scale-up-ualink-switch/) · [UALink white paper (Jan 2026)](https://ualinkconsortium.org/wp-content/uploads/2026/01/UALink_White_Paper_Publication_Candidate_FINAL_VERSION.pdf)
 
 ### 9. Compiler & Kernel Optimization
 
-**ROCm 7.x — AOTriton + better Triton backend** — AMD has integrated AOTriton in ROCm 7.0 to pre-compile common kernels and reduce JIT jitter, while improving the Triton AMD backend and torch.compile graph compilation. [ROCm docs](https://rocm.docs.amd.com/en/latest/how-to/rocm-for-ai/inference-optimization/vllm-optimization.html)
-
-**vLLM upgrades** — vLLM moved to CUDA 13.0 + PyTorch 2.11 default; XPU support on torch 2.11; gRPC serving, GPU-less render serving, and NGram GPU speculative decoding now in main. [vLLM releases](https://github.com/vllm-project/vllm/releases)
-
-**Quantization snapshot (mid-2026)** — On open inference benchmarks: AWQ ~95% quality retention vs. FP16; Marlin-AWQ leads at 741 tok/s output throughput, Marlin-GPTQ at 712 tok/s — both beat FP16 baseline. GGUF remains the default for llama.cpp / Ollama CPU+GPU hybrid deployment. [Local AI Master roundup](https://localaimaster.com/blog/quantization-explained)
-
-**CUDA kernel-generation research** — CUDA-L1 (contrastive RL for kernel optimisation), CUDA Agent (agentic RL kernel generation), and K-Search (co-evolved intrinsic world model search) are the three CUDA-kernel-synthesis lines being cited in this week's arXiv discussion. [arXiv listing](https://arxiv.org/list/cs.AI/recent)
-
----
+No headline-grade compiler/runtime release landed inside the 11–17 May window. Background context confirmed during the pass: **vLLM v0.17.0** (early March 2026) upgraded to **PyTorch 2.10**, added **FlashAttention 4**, matured Model Runner V2 with pipeline-parallel + decode context parallel, shipped a `--performance-mode` flag and Anthropic API compatibility. **vLLM TPU** unified PyTorch and JAX behind a single JAX→XLA lowering path, delivering ~**20% higher throughput**. **llama.cpp** now ships a built-in MCP client (`--webui-mcp-proxy`) and RPC layer-splitting across machines. Production quantization remains dominated by AWQ (vLLM), GGUF (laptops), GPTQ (incumbent); kernel choice matters — AWQ on Marlin can be 10× faster than naive kernels. [PyTorch blog](https://pytorch.org/blog/pytorch-xla-2-7-release-usability-vllm-boosts-jax-bridge-gpu-build/) · [NVIDIA: vLLM release notes](https://docs.nvidia.com/deeplearning/frameworks/vllm-release-notes/index.html) · [TheAIEngineer: GPTQ vs AWQ vs GGUF](https://theaiengineer.substack.com/p/quantization-in-practice-gptq-vs)
 
 ### 10. AI Safety, Alignment & Policy
 
-**Google catches AI-generated zero-day in the wild** — Google's Threat Intelligence Group disclosed (May 11, 2026) the first observed case of attackers using a Mythos-class model to generate a working zero-day exploit; Google said it blocked an attempted "mass exploitation event" this week. [Bloomberg](https://www.bloomberg.com/news/articles/2026-05-11/hackers-used-ai-to-build-zero-day-attack-google-researchers-say)
+**Project Glasswing (Anthropic) — adoption phase** — Launch partners include AWS, Apple, Broadcom, Cisco, CrowdStrike, Google, JPMorganChase, the Linux Foundation, Microsoft, NVIDIA and Palo Alto Networks; Anthropic committed up to **$100M in Mythos Preview usage credits** plus **$4M in direct grants** to open-source security orgs. **Verizon joined on 15 May** to test Mythos on its infrastructure; the Pentagon publicly signalled "opportunity." [Anthropic](https://www.anthropic.com/glasswing) · [GSMArena: Verizon](https://www.gsmarena.com/verizon_joins_project_glasswing_to_test_anthropics_claude_mythos_model_on_its_infrastructure-news-72850.php) · [GovConWire](https://www.govconwire.com/articles/anthropic-glasswing-claude-mythos-katherine-sutton-dow-cybersecurity)
 
-**CAISI evaluations with Google DeepMind, Microsoft, xAI** — The US Center for AI Standards and Innovation expanded its pre-release evaluation programme to cover Google DeepMind, Microsoft, and xAI (adding to existing OpenAI/Anthropic agreements). [CNBC, May 5 2026](https://www.cnbc.com/2026/05/05/ai-oversight-trump-google-microsoft-xai.html)
+**UK AI Security Institute — 32-step autonomous cyberattack chains** ⚠️ *single-source* — UK AISI documented frontier models running fully end-to-end attack chains without a human in the loop; Palo Alto Networks Unit 42 estimated defenders have a **3–5 month window** before similar capabilities propagate beyond frontier labs; Microsoft's internal AI auditor (**MDASH**) surfaced **16 previously undocumented Windows vulnerabilities**, several critical, all patched in this month's Patch Tuesday. [Shared Sapience / Century Report](https://sharedsapience.substack.com/p/the-century-report-weekly-may-11-17-2026)
 
-**Q1 2026 legal-AI hallucination sanctions hit record** — At least $145k in Q1 sanctions for AI-generated false citations, with a single $109,700 penalty in Oregon; Damien Charlotin's tracker now catalogues 1,353+ legal hallucination cases globally. [ComplianceHub.wiki](https://compliancehub.wiki/legal-ai-hallucination-reckoning-2026/)
+**US AI evaluation regime** — The Center for AI Standards and Innovation (CAISI) finalised agreements with **Google DeepMind, Microsoft and xAI** allowing US government pre-release evaluation of frontier models. This complements existing Anthropic and OpenAI testing arrangements. [CNBC](https://www.cnbc.com/2026/05/05/ai-oversight-trump-google-microsoft-xai.html)
 
-**US export-control framework — Q2 2026 status** — January 2026 BIS rule shifted H200-/MI325X-equivalent exports to case-by-case review; AI OVERWATCH Act advanced by House Foreign Affairs (Jan 21); Remote Access Security Act (RASA) passed the House 369-22, extending export-control jurisdiction to remote GPU cloud access. [Mayer Brown briefing](https://www.mayerbrown.com/en/insights/publications/2026/01/administration-policies-on-advanced-ai-chips-codified)
+**Export controls posture** — Anthropic publicly reiterated its case (timed to Trump's China visit) that the US should not relax sales of top-end NVIDIA chips to China, citing **distillation attacks** via fraudulent accounts and **remote-access loopholes** (Alibaba/ByteDance reportedly training on US chips via offshore data centres). Congressional context: **RASA** (Remote Access Security Act, passed House 369–22 in January) would treat foreign remote compute access as an export transaction; the **AI OVERWATCH Act** advanced 21 Jan would prohibit Blackwell sales to entities of concern for two years; **BIS final rule (15 Jan 2026)** moved H200- and MI325X-equivalent reviews to a case-by-case posture. [Times of India: Anthropic paper](https://timesofindia.indiatimes.com/technology/tech-news/during-trumps-china-visit-anthropic-just-reminded-america-why-it-should-not-sell-top-end-nvidia-chips-to-china-since-most-/articleshow/131102724.cms) · [Mayer Brown](https://www.mayerbrown.com/en/insights/publications/2026/01/administration-policies-on-advanced-ai-chips-codified) · [Morgan Lewis](https://www.morganlewis.com/pubs/2026/01/bis-revises-export-review-policy-for-advanced-ai-chips-destined-for-china-and-macau)
 
-**Constitutional-AI scale-up** — Anthropic's Claude 4.5 reportedly uses a ~200-principle constitution (up from ~50 in earlier generations) covering harmlessness, honesty, and helpfulness across diverse scenarios. ⚠️ *single-source* [Claude5 Hub](https://claude5.com/news/ai-safety-2026-alignment-research-breakthroughs)
-
-**Automated red-teaming research** — 214,271 attack attempts across 30 LLM challenges show automated red-teaming achieving 69.5% success vs. 47.6% for manual attempts. [arXiv 2605.04019](https://arxiv.org/html/2605.04019v1)
-
----
+**Hallucination accountability** — South Africa withdrew its Draft National AI Policy 17 days after publication after at least **6 of 67 bibliography sources** were found to be AI hallucinations. US legal sanctions tied to AI-generated false citations reached **~$145K** in Q1 2026, the highest quarterly total on record, including a single **$109,700** penalty against an Oregon attorney. [Rest of World](https://restofworld.org/2026/government-ai-hallucinations-south-africa-deloitte/) · [ComplianceHub legal-AI tracker](https://compliancehub.wiki/legal-ai-hallucination-reckoning-2026/)
 
 ### 11. Applications & Industry
 
-**Anthropic + Goldman + Blackstone + Hellman & Friedman — $1.5B enterprise AI JV** — Anthropic and OpenAI separately announced joint ventures to deploy enterprise AI services. [CNBC, May 4 2026](https://www.cnbc.com/2026/05/04/anthropic-goldman-blackstone-ai-venture.html)
+**Anthropic × Gates Foundation $200M / 4-year partnership — 14 May** — Targets global health (vaccines/therapeutics, polio, HPV, eclampsia/preeclampsia), K-12 education in the US, sub-Saharan Africa and India (with public-good benchmarks and knowledge graphs), and economic mobility (smallholder-farming agronomy, US portable skills records). Anthropic's half is delivered as Claude credits + technical staff; Gates supplies grants and programme design. [Anthropic](https://www.anthropic.com/news/gates-foundation-partnership) · [Gates Foundation](https://www.gatesfoundation.org/ideas/media-center/press-releases/2026/05/ai-anthropic-partnership)
 
-**SAP Autonomous Enterprise (Sapphire 2026, Orlando)** — Combines SAP Business AI Platform, SAP Autonomous Suite, and Joule Work, embedding autonomous agents directly into ERP workflows. [MEXC](https://www.mexc.com/news/1086381)
+**SAP Sapphire — Autonomous Enterprise** ⚠️ *single-source within window* — SAP unveiled the SAP Business AI Platform and SAP Autonomous Suite with **>50 domain-specific Joule Assistants** across finance, supply chain, procurement, HCM and CX, with deepened partnerships with Anthropic, AWS, Google Cloud, Microsoft, NVIDIA and Palantir. [SAP News](https://news.sap.com/2026/05/sap-sapphire-keynote-business-ai-platform-power-autonomous-enterprise/)
 
-**MongoDB unified AI data platform (MongoDB London 2026)** — Single platform combining real-time DB, full-text and vector search, memory, embeddings, and reranker models for production agents. [PRNewswire](https://www.prnewswire.com/news-releases/mongodb-makes-enterprise-ai-production-ready-302764870.html)
+**Oracle OCI Enterprise AI** — Launched with first-class hosting for **Grok 4.3** and **NVIDIA Nemotron 3 Nano Omni**, plus prebuilt AI Accelerator Pack solutions. [Oracle Blog: What's New in AI](https://blogs.oracle.com/ai-and-datascience/whats-new-in-ai-may-2026)
 
-**Oracle OCI Enterprise AI** — New platform layer for building, deploying, and scaling AI solutions, announced this week. [Oracle blog](https://blogs.oracle.com/ai-and-datascience/whats-new-in-ai-may-2026)
+**OpenAI × Malta — "AI for All" — 16 May** ⚠️ *single-source* — One year of ChatGPT Plus for any Maltese citizen who completes a University-of-Malta-designed AI literacy and safety course, overseen by the Malta Digital Innovation Authority. First country-wide programme of its kind. [Champaign Magazine summary](https://champaignmagazine.com/2026/05/17/ai-by-ai-weekly-top-5-may-11-17-2026/)
 
-**Google "Googlebook" + Magic Pointer (May 12, 2026)** — A new Android-class device positioned as "designed for Gemini Intelligence" with a DeepMind-built Magic Pointer feature. [Google blog](https://blog.google/products-and-platforms/platforms/android/meet-googlebook/)
+**Notion + MongoDB enterprise platforms** — Notion launched a Developer Platform with Workers, an External Agent API and database sync for in-Notion multi-step workflows; MongoDB announced new unified-AI-data-platform capabilities at MongoDB local London 2026. [PRNewswire: MongoDB](https://www.prnewswire.com/news-releases/mongodb-makes-enterprise-ai-production-ready-302764870.html)
 
-**Microsoft / OpenAI restructure** — Microsoft and OpenAI moved from exclusive to non-exclusive cloud-AI partnership, opening commercial competition. [MarketingProfs](https://www.marketingprofs.com/opinions/2026/54655/ai-update-may-8-2026-ai-news-and-views-from-the-past-week)
+**Robotics deployment phase** — Japan Airlines deployed humanoid robots (Unitree-based, via GMO AI & Robotics) at Tokyo Haneda in May; AGIBOT framed its annual conference around moving from R&D to deployment. Bessemer described the moment as the "GPT-2.5 of robotics." Venture funding for robotics hit **$40.7B annually**, with China committing a **$138B state guidance fund** to AI/robotics. [People's Daily: China embodied AI](https://en.people.cn/n3/2026/0506/c90000-20453012.html) · [Robot Report: AGIBOT World 2026](https://www.therobotreport.com/agibot-world-2026-dataset-open-source-accelerate-embodied-ai-development/)
 
-**Coinbase 14% workforce cut tied to AI productivity** — Joins Oracle, Snap, IBM 2026 cohort of AI-linked restructurings. [MarketingProfs](https://www.marketingprofs.com/opinions/2026/54655/ai-update-may-8-2026-ai-news-and-views-from-the-past-week)
-
-**Embodied AI deployments** — Japan Airlines deployed humanoid robots at Haneda (May 2026) under a three-year operational commitment; Bessemer characterises the field as in a "GPT-2.5 moment for robotics". [Bessemer / DigitalTrends summary](https://www.digitaltrends.com/contributor-content/ready-or-not-embodied-ai-is-leaving-the-lab-and-entering-infrastructure/) · [The Robot Report](https://www.therobotreport.com/agibot-world-2026-dataset-open-source-accelerate-embodied-ai-development/)
-
-**Snap / Perplexity $400M deal ended** — Confirmed terminated before broad rollout. [MarketingProfs](https://www.marketingprofs.com/opinions/2026/54655/ai-update-may-8-2026-ai-news-and-views-from-the-past-week)
-
----
-
-### 12. Research Highlights — Top Papers (8–15 May 2026)
+### 12. Research Highlights — Top Papers
 
 | Paper | Authors / Lab | Key Contribution | Link |
-|-------|--------------|-----------------|------|
-| Litespark Inference on Consumer CPUs: Custom SIMD Kernels for Ternary Neural Networks | Independent | Ternary {-1,0,+1} weights + SIMD; matrix multiplies become add/subtract for consumer-CPU inference | [arXiv 2605.06485](https://arxiv.org/html/2605.06485v1) |
-| LAMP: Look-Ahead Mixed-Precision Inference of Large Language Models | — | Look-ahead flagging of round-off-sensitive ops, up to 2 orders of magnitude accuracy gain with ~1% recomputation | [arXiv 2601.21623v2](https://arxiv.org/html/2601.21623v2) |
-| You Snooze, You Lose: Automatic Safety Alignment Restoration through Neural Weight Translation | — | Method to repair safety alignment lost during fine-tuning via learned weight translation | [arXiv 2605.04992](https://arxiv.org/html/2605.04992v1) |
-| Position: Safety and Fairness in Agentic AI Depend on Interaction Topology, Not on Model Scale or Alignment | — | Argues agentic systems should be treated as dynamical systems; safety determined by topology not weights | [arXiv 2605.01147](https://arxiv.org/abs/2605.01147) |
-| Redefining AI Red Teaming in the Agentic Era: From Weeks to Hours | — | Automated agentic red-teaming framework collapsing assessment cycle times | [arXiv 2605.04019](https://arxiv.org/html/2605.04019v1) |
-| International AI Safety Report 2026 | Multi-author (international) | Synthesises capabilities, emerging risks, and safety status of general-purpose AI | [arXiv 2602.21012](https://arxiv.org/abs/2602.21012) |
-| SenseNova-U1: Native Unified Multimodal Model | SenseNova + Light-AI | NEO-unify architecture: jointly process pixels + words for understanding and generation | [arXiv listing](https://arxiv.org/list/cs.AI/recent) |
-| MinerU2.5: 1.2B-parameter Document Parsing VLM | Alibaba / collaborators | Coarse-to-fine parsing strategy hitting SOTA recognition accuracy with sub-2B params | [arXiv listing](https://arxiv.org/list/cs.AI/recent) |
-| SlimQwen-23A2B: Structured Pruning + Progressive Distillation | Alibaba / MBZUAI / KAUST | 4× smaller model with 72% peak-memory reduction, 48% throughput gain | [arXiv listing](https://arxiv.org/list/cs.AI/recent) |
-| Improving Efficiency of GPU Kernel Optimization Agents | — | Agentic RL pipeline for GPU kernel optimisation | [arXiv 2603.29010](https://arxiv.org/pdf/2603.29010) |
+|-------|---------------|------------------|------|
+| Prospective multi-pathogen disease forecasting using autonomous LLM-guided tree search | Sarah Martinson et al. | LLM-guided tree search for prospective multi-pathogen epidemiological forecasting. | [arXiv cs.AI list](https://arxiv.org/list/cs.AI/recent) |
+| FORGE: Self-Evolving Agent Memory With No Weight Updates via Population Broadcast | Igor Bogdanov et al. | Population-broadcast memory updates for agentic systems without retraining the base model. | [arXiv cs.AI list](https://arxiv.org/list/cs.AI/recent) |
+| Is Grep All You Need? How Agent Harnesses Reshape Agentic Search | Sahil Sen et al. | Argues that classic text-search primitives (grep) inside well-designed harnesses can dominate complex retrieval stacks for code agents. | [arXiv cs.CL list](https://arxiv.org/list/cs.CL/recent) |
+| Text Knows What, Tables Know When: Clinical Timeline Reconstruction via Retrieval-Augmented Multimodal Alignment | Sayantan Kumar et al. | RAG + multimodal alignment for reconstructing patient clinical timelines from text and tabular EHR data. | [arXiv cs.CL list](https://arxiv.org/list/cs.CL/recent) |
+| The Causal Description Gap: Information-Theoretic Separations Across Pearl's Hierarchy | Seyed Morteza Emadi | Information-theoretic separation results across Pearl's three rungs of causal inference. | [arXiv stat.ML list](https://arxiv.org/list/stat.ML/recent) |
+| Sparser, Faster, Lighter Transformer Language Models (updated 8 May 2026) | (arXiv 2603.23198) | New sparse packing formats + CUDA kernels for sparse LLM inference/training; L1 regularisation can induce >99% sparsity with negligible quality loss. | [arXiv:2603.23198](https://arxiv.org/abs/2603.23198) |
+| Litespark Inference on Consumer CPUs: Custom SIMD Kernels for Ternary Neural Networks (7 May 2026) | (arXiv 2605.06485) | Custom SIMD kernels for {-1, 0, +1} ternary models on consumer CPUs, replacing matmul with add/sub. | [arXiv:2605.06485](https://arxiv.org/html/2605.06485v1) |
+
+⚠️ Several arXiv titles surfaced only through arXiv's recent-list rendering and the Century Report digest; treat author lists and exact submission dates as provisional until confirmed against the canonical arXiv record.
 
 ---
 
 ### Sources Consulted
 
-- https://www.marketingprofs.com/opinions/2026/54655/ai-update-may-8-2026-ai-news-and-views-from-the-past-week
-- https://www.marketingprofs.com/opinions/2026/54786/ai-update-may-15-2026-ai-news-and-views-from-the-past-week
-- https://www.cnbc.com/2026/05/11/heres-how-artificial-intelligence-is-changing-boardrooms.html
-- https://www.cnbc.com/2026/05/12/google-races-put-gemini-at-center-of-android-before-apples-ai-reboot.html
-- https://www.cnbc.com/2026/05/13/palo-alto-ai-cyberattacks-mythos-gpt.html
-- https://www.cnbc.com/2026/05/08/wall-street-ai-chip-love-moves-from-nvidia-to-intel-amd-and-micron.html
-- https://www.cnbc.com/2026/05/05/ai-oversight-trump-google-microsoft-xai.html
-- https://www.cnbc.com/2026/05/04/anthropic-goldman-blackstone-ai-venture.html
-- https://llm-stats.com/ai-news
+**Frontier labs / models / agents**
+- https://champaignmagazine.com/2026/05/17/ai-by-ai-weekly-top-5-may-11-17-2026/
+- https://www.anthropic.com/glasswing
+- https://www.anthropic.com/project/glasswing
+- https://red.anthropic.com/2026/mythos-preview/
+- https://www.anthropic.com/news/gates-foundation-partnership
+- https://www.gatesfoundation.org/ideas/media-center/press-releases/2026/05/ai-anthropic-partnership
+- https://openai.com/daybreak/
+- https://openai.com/index/openai-launches-the-deployment-company/
+- https://thehackernews.com/2026/05/openai-launches-daybreak-for-ai-powered.html
+- https://www.cybersecuritydive.com/news/OpenAI-Daybreak-cyber-threats/820122/
+- https://winbuzzer.com/2026/05/12/openai-announces-daybreak-to-bring-frontier-ai-int-xcxwbn/
+- https://www.cnbc.com/2026/05/11/open-ai-dresser-enterprise-business.html
+- https://www.therundown.ai/p/google-deepmind-powerful-ai-co-mathematician
+- https://www.androidauthority.com/what-to-expect-from-google-io-2026-3664979/
+- https://www.aixploria.com/en/ai-radar/google-io-2026-gemini-announcements-preview/
+- https://pasqualepillitteri.it/en/news/2504/google-magic-pointer-deepmind-gemini-guide-2026
+- https://www.perceptron.inc/blog/introducing-perceptron-mk1
+- https://venturebeat.com/technology/perceptron-mk1-shocks-with-highly-performant-video-analysis-ai-model-80-90-cheaper-than-anthropic-openai-and-google
+- https://benchlm.ai/blog/posts/perceptron-mk1-frontier-video-models
+- https://www.businesswire.com/news/home/20260512066109/en/Perceptron-AI-Launches-Physical-AI-Model-That-Matches-Frontier-Labs-at-a-Fraction-of-the-Cost
+- https://openrouter.ai/perceptron/perceptron-mk1
+- https://techcrunch.com/2026/04/29/sources-anthropic-could-raise-a-new-50b-round-at-a-valuation-of-900b/
+- https://www.pymnts.com/news/artificial-intelligence/2026/anthropic-valuation-could-eclipse-openai-50-billion-dollar-funding-round/
+- https://techcrunch.com/2026/05/14/what-happens-when-ai-starts-building-itself/
+- https://tech.eu/2026/05/13/recursive-superintelligence-emerges-from-stealth-with-650m-raise/
+- https://siliconangle.com/2026/05/13/recursive-superintelligence-raises-650m-build-self-improving-ai-models/
 - https://llm-stats.com/llm-updates
-- https://www.inceptionlabs.ai/blog/introducing-mercury-2
-- https://venturebeat.com/technology/anthropic-finally-beat-openai-in-business-ai-adoption-but-3-big-threats-could-erase-its-lead
-- https://fortune.com/2026/05/14/cerebras-one-of-the-biggest-ipos-of-the-year/
-- https://fortune.com/2026/05/13/behold-the-googlebook/
-- https://theaiinsider.tech/2026/05/14/anthropic-overtakes-openai-among-business-customers-as-it-courts-small-firms-and-eyes-950b-valuation/
-- https://www.explainx.ai/blog/google-gemini-omni-video-model-io-2026
-- https://www.bentoml.com/blog/multimodal-ai-a-guide-to-open-source-vision-language-models
-- https://www.bentoml.com/blog/navigating-the-world-of-open-source-large-language-models
-- https://pytorch.org/blog/pytorch-xla-2-7-release-usability-vllm-boosts-jax-bridge-gpu-build/
-- https://github.com/vllm-project/vllm/releases
-- https://blog.vllm.ai/2025/10/16/vllm-tpu.html
+- https://llm-stats.com/ai-news
 - https://huggingface.co/blog/huggingface/state-of-os-hf-spring-2026
-- https://blog.google/innovation-and-ai/models-and-research/google-deepmind/measuring-agi-cognitive-framework/
-- https://blog.google/products-and-platforms/platforms/android/meet-googlebook/
-- https://nvidianews.nvidia.com/news/nvidia-vera-rubin-platform
+- https://ai.meta.com/research/publications/cwm-an-open-weights-llm-for-research-on-code-generation-with-world-models/
+- https://agentic.ai/news
+
+**Hardware / silicon / infra**
+- https://www.cnbc.com/2026/05/14/cerebras-cbrs-stock-trade-nasdaq-ipo.html
+- https://www.cnbc.com/2026/05/15/cerebras-stock-ipo-debut-ai.html
+- https://techcrunch.com/2026/05/14/cerebras-raises-5-5b-kicking-off-2026s-ipo-season-with-a-bang/
+- https://www.theregister.com/ai-ml/2026/05/15/cerebras-wafer-scale-ai-bet-delivers-blockbuster-ipo/5240821
+- https://www.bloomberg.com/news/articles/2026-05-14/cerebras-shares-indicated-to-surge-89-after-year-s-top-ipo
+- https://www.cerebras.ai/press-release/cerebras-systems-announces-pricing-of-initial-public-offering
 - https://nvidianews.nvidia.com/news/rubin-platform-ai-supercomputer
-- https://www.tomshardware.com/tech-industry/artificial-intelligence/intels-roadmap-adds-mysterious-hybrid-ai-processor-featuring-x86-cpus-dedicated-ai-accelerator-and-programmable-ip-chip-may-capitalize-on-a-market-forgotten-by-nvidia-and-amd
+- https://nvidianews.nvidia.com/news/nvidia-vera-rubin-platform
+- https://nvidianews.nvidia.com/news/meta-builds-ai-infrastructure-with-nvidia
+- https://www.sec.gov/Archives/edgar/data/1769628/000176962826000154/ex991.htm
+- https://www.cnbc.com/2026/05/08/wall-street-ai-chip-love-moves-from-nvidia-to-intel-amd-and-micron.html
+- https://www.spglobal.com/market-intelligence/en/news-insights/research/2026/03/amd-s-next-generation-ai-chips-set-to-power-2026-data-center-growth
 - https://www.tomshardware.com/pc-components/gpus/hbm4-memory-to-double-speeds-in-2026-2048-bit-interface-to-revolutionize-artificial-intelligence-and-hpc-markets-report
-- https://www.notebookcheck.net/Nvidia-may-raise-prices-as-it-pays-Samsung-double-for-future-HBM4-AI-memory-modules-with-3-3-TB-s-bandwidth.1172580.0.html
 - https://introl.com/blog/ai-memory-supercycle-hbm-2026
 - https://www.koreaherald.com/article/10737182
 - https://www.marvell.com/company/newsroom/marvell-next-gen-cxl-switch-memory-pooling-breaks-ai-memory-wall.html
+- https://www.poet-technologies.com/news/poet-technologies-and-lumilens-advance-wafer-level-photonic-integration-for-next-generation-ai-optical-networks
 - https://www.globenewswire.com/news-release/2026/05/14/3294762/0/en/poet-technologies-and-lumilens-advance-wafer-level-photonic-integration-for-next-generation-ai-optical-networks.html
-- https://www.manilatimes.net/2026/05/12/tmt-newswire/globenewswire/poet-technologies-and-lumilens-advance-wafer-level-photonic-integration-for-next-generation-ai-optical-networks/2343798
+- https://www.tomshardware.com/networking/nvidia-outlines-plans-for-using-light-for-communication-between-ai-gpus-by-2026-silicon-photonics-and-co-packaged-optics-may-become-mandatory-for-next-gen-ai-data-centers
 - https://www.hpcwire.com/2025/12/02/upscale-ai-eyes-late-2026-for-scale-up-ualink-switch/
-- https://www.theregister.com/on-prem/2026/04/07/ualink-delivers-20-spec-before-v-10-silicon-ships/5228485
-- https://www.networkworld.com/article/4050881/nvidia-networking-roadmap-ethernet-infiniband-co-packaged-optics-will-shape-data-center-of-the-future.html
-- https://drivenets.com/blog/why-infiniband-falls-short-of-ethernet-for-ai-networking/
-- https://rocm.docs.amd.com/en/latest/how-to/rocm-for-ai/inference-optimization/vllm-optimization.html
-- https://localaimaster.com/blog/quantization-explained
-- https://cogitx.ai/blog/ai-agents-complete-overview-2026
-- https://www.bloomberg.com/news/articles/2026-05-11/hackers-used-ai-to-build-zero-day-attack-google-researchers-say
-- https://compliancehub.wiki/legal-ai-hallucination-reckoning-2026/
-- https://www.mayerbrown.com/en/insights/publications/2026/01/administration-policies-on-advanced-ai-chips-codified
-- https://claude5.com/news/ai-safety-2026-alignment-research-breakthroughs
-- https://arxiv.org/html/2605.04019v1
-- https://arxiv.org/html/2605.06485v1
-- https://arxiv.org/html/2601.21623v2
-- https://arxiv.org/html/2605.04992v1
-- https://arxiv.org/abs/2605.01147
-- https://arxiv.org/abs/2602.21012
-- https://arxiv.org/list/cs.AI/recent
-- https://arxiv.org/pdf/2603.29010
-- https://www.mexc.com/news/1086381
-- https://www.prnewswire.com/news-releases/mongodb-makes-enterprise-ai-production-ready-302764870.html
-- https://blogs.oracle.com/ai-and-datascience/whats-new-in-ai-may-2026
-- https://techcrunch.com/2026/05/04/anthropic-and-openai-are-both-launching-joint-ventures-for-enterprise-ai-services/
-- https://techcrunch.com/2026/05/15/osaurus-brings-both-local-and-cloud-ai-models-to-your-mac/
-- https://semiengineering.com/hbm-shifts-testing-left-to-preserve-ai-chip-yield/
-- https://pasqualepillitteri.it/en/news/2594/x-algorithm-open-source-may-2026
-- https://smbtech.au/news/google-deepmind-releases-gemma-4-its-most-capable-open-source-ai-models/
-- https://blogs.nvidia.com/blog/rtx-ai-garage-hermes-agent-dgx-spark/
-- https://kilo.ai/open-source-models
-- https://www.tastylive.com/news-insights/the-daily-bond-selloff-oil-above-109-and-the-first-real-rates-test-for-ai
-- https://uvik.net/blog/python-ai-agent-frameworks/
-- https://www.straive.com/blogs/top-agentic-ai-trends-to-watch-in-2026/
-- https://insights.reinventing.ai/articles/ai-agents-open-source-tooling-launches-2026-05-14
-- https://www.therobotreport.com/agibot-world-2026-dataset-open-source-accelerate-embodied-ai-development/
-- https://www.digitaltrends.com/contributor-content/ready-or-not-embodied-ai-is-leaving-the-lab-and-entering-infrastructure/
-- https://www.datacenterknowledge.com/build-design/data-center-world-2026-ai-pushes-infrastructure-to-new-limits
-- https://cloud.google.com/blog/products/compute/ai-infrastructure-at-next26
-- https://www.sdxcentral.com/analysis/ai-inferencing-will-define-2026-and-the-markets-wide-open/
-- https://thehackernews.com/2026/05/how-ai-hallucinations-are-creating-real.html
+- https://ualinkconsortium.org/wp-content/uploads/2026/01/UALink_White_Paper_Publication_Candidate_FINAL_VERSION.pdf
+- https://newsletter.semianalysis.com/p/the-great-ai-silicon-shortage
 - https://newsletter.semianalysis.com/p/cpus-are-back-the-datacenter-cpu
+- https://www.datacenterknowledge.com/networking/ai-inference-the-next-stress-test-for-global-data-center-infrastructure
+- https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2026/ai-infrastructure-compute-strategy.html
 
----
+**Software / runtimes / quantisation**
+- https://pytorch.org/blog/pytorch-xla-2-7-release-usability-vllm-boosts-jax-bridge-gpu-build/
+- https://docs.nvidia.com/deeplearning/frameworks/vllm-release-notes/index.html
+- https://blog.vllm.ai/2025/10/16/vllm-tpu.html
+- https://theaiengineer.substack.com/p/quantization-in-practice-gptq-vs
 
-*Quality notes:*
-- Items dated within the 8–15 May 2026 window are unmarked; older context dates (CES 2026, March/April releases) are included only where they directly underpin a development reported this week.
-- ⚠️ *single-source* tags flag items confirmed in only one pass.
-- A handful of arXiv IDs (e.g., 2605.xxxxx) are surfaced via search-engine excerpts; verify directly against the arXiv listing before citing externally.
+**Safety, policy, applications**
+- https://www.cnbc.com/2026/05/05/ai-oversight-trump-google-microsoft-xai.html
+- https://timesofindia.indiatimes.com/technology/tech-news/during-trumps-china-visit-anthropic-just-reminded-america-why-it-should-not-sell-top-end-nvidia-chips-to-china-since-most-/articleshow/131102724.cms
+- https://www.mayerbrown.com/en/insights/publications/2026/01/administration-policies-on-advanced-ai-chips-codified
+- https://www.morganlewis.com/pubs/2026/01/bis-revises-export-review-policy-for-advanced-ai-chips-destined-for-china-and-macau
+- https://restofworld.org/2026/government-ai-hallucinations-south-africa-deloitte/
+- https://compliancehub.wiki/legal-ai-hallucination-reckoning-2026/
+- https://sharedsapience.substack.com/p/the-century-report-weekly-may-11-17-2026
+- https://www.gsmarena.com/verizon_joins_project_glasswing_to_test_anthropics_claude_mythos_model_on_its_infrastructure-news-72850.php
+- https://www.govconwire.com/articles/anthropic-glasswing-claude-mythos-katherine-sutton-dow-cybersecurity
+- https://news.sap.com/2026/05/sap-sapphire-keynote-business-ai-platform-power-autonomous-enterprise/
+- https://news.sap.com/2026/05/sap-sapphire-sap-unveils-autonomous-enterprise/
+- https://blogs.oracle.com/ai-and-datascience/whats-new-in-ai-may-2026
+- https://www.prnewswire.com/news-releases/mongodb-makes-enterprise-ai-production-ready-302764870.html
+- https://en.people.cn/n3/2026/0506/c90000-20453012.html
+- https://www.therobotreport.com/agibot-world-2026-dataset-open-source-accelerate-embodied-ai-development/
+- https://www.startuphub.ai/ai-news/ai-news/2026/defense-ai-6-2-billion-week-may-11-2026
+
+**Research papers**
+- https://arxiv.org/list/cs.AI/recent
+- https://arxiv.org/list/cs.CL/recent
+- https://arxiv.org/list/stat.ML/recent
+- https://arxiv.org/abs/2603.23198
+- https://arxiv.org/html/2605.06485v1
