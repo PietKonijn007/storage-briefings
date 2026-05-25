@@ -1,5 +1,6 @@
 import './globals.css';
 import Link from 'next/link';
+import LogoutButton from './logout-button';
 
 export const metadata = {
   title: 'Briefings — Storage · AI · Compute',
@@ -41,6 +42,8 @@ export default function RootLayout({ children }) {
               >
                 AI &amp; Compute
               </Link>
+              <span className="w-px h-4 bg-[var(--color-border)]" />
+              <LogoutButton />
             </nav>
           </div>
         </header>
